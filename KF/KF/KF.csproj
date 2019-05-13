@@ -147,6 +147,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CalculatorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -154,6 +155,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App_Code\Helpers\CalcHelper.cshtml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -178,6 +180,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Shared\CSS\StyleSheet1.css" />
+    <Content Include="Views\Shared\Icons\BilAnsvar_Blue.jpg" />
+    <Content Include="Views\Shared\Icons\BilFoererpladsdaekning_Blue.jpg" />
+    <Content Include="Views\Shared\Icons\BilKasko_Blue.jpg" />
+    <Content Include="Views\Shared\Icons\BilUdvidet_Blue.jpg" />
+    <Content Include="Views\Shared\Icons\BilVejhjaelp_Blue.jpg" />
+    <Content Include="Views\Shared\Icons\Parkeringsskade_Blue.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -1,0 +1,17 @@
+﻿.calc-button {
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px; 
+}
+
+.underlined-header {
+    border-style: solid;
+    border-width: 0px 0px 4px 0px;
+    font-size: 25px;
+    padding: 8px 0px 2px 0px;
+    border-color: darkred;
+    margin-bottom: 4px;
+}

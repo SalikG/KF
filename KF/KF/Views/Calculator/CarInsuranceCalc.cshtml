@@ -1,7 +1,83 @@
-﻿
-@{
-    ViewBag.Title = "CarInsuranceCalc";
-}
+﻿@using ASP.Helpers
 
-<h2>CarInsuranceCalc</h2>
 
+<div class="container">
+    @CalcHelper.Input("regNum", "Registreringsnummer", "Reg Nr.")
+    <div class="form-check-inline">
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio">Bilskifte
+        </label>
+    </div>
+    <div class="form-check-inline">
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio">Ekstra bil
+        </label>
+    </div>
+    @CalcHelper.RadioYesNo("HasYellowPlate", "Gule nummerplader")
+    <h1 class="underlined-header">
+        Bil info
+    </h1>
+    <table class="table">
+        <tr>
+            <td>Mærke: </td>
+            <td>DATA </td>
+        </tr>
+        <tr>
+            <td>Model:  </td>
+            <td>DATA</td>
+        </tr>
+        <tr>
+            <td>Årgang:</td>
+            <td>DATA</td>
+        </tr>
+    </table>
+    <h1 class="underlined-header">
+        Dækninger
+    </h1>
+
+    <div class="row">
+        @CalcHelper.InsuranceBtn("Ansvar og Kasko", "/CalculationApp/src/spritesheets/icons/BilKasko_Blue.svg")
+    </div>
+    <h1 style="font-size: 20px;
+		margin-bottom: 4px;">
+        Tilvalgsdækninger
+    </h1>
+    <div class="row">
+        @CalcHelper.InsuranceBtn("Vejhjælp", "Shared/Icons/BilAnsvar_Blue.jpg")
+        @CalcHelper.InsuranceBtn("Førepladsdækning", "../Shared/Icons/BilFoererpladsdaekning_Blue.jpg")
+        @CalcHelper.InsuranceBtn("Udvidet bildækning", "/KF/Views/Shared/Icons/BilUdvidet_Blue.jpg")
+        @CalcHelper.InsuranceBtn("Parkeringsskade", "Views/Shared/Icons/Parkeringsskade_Blue.jpg")
+    </div>
+    <img src="../Shared/Icons/BilUdvidet_Blue.svg" alt="Alternate Text" />
+    <div class="form-group">
+
+        <div class="row">
+            <div class="col">
+                @CalcHelper.RadioYesNo("extraEquipment", "Har bilen ekstraudstyr for over 24.865 kr?")
+            </div>
+            <div class="col">
+                Vælg selvrisiko
+                <div>
+                    <input type="range" valueAsNumber="" class="form-control-range" name="range" id="rangeId" max="5" min="0" step="1" oninput="GetRangeNum()">
+                </div>
+                <div>
+                    <output style="font-size: medium; margin-left: 10px" name="rangeLbl" id="rangeLblId" for="range"></output>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function GetRangeNum() {
+        var index = document.getElementById('rangeId');
+        var rangeNums = ["0", "2305", "4611", "7245", "9881", "12514"];
+        document.getElementById('rangeLblId').innerHTML = rangeNums[parseInt(index.value)];
+        console.log(parseInt(index.value))
+        console.log(index.value)
+    }
+
+    function InsuranceBtnClickEvent(id) {
+        document.getElementById(id).style.backgroundColor = "darkblue";
+        console.log(id);
+    }
+</script>
