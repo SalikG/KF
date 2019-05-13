@@ -1,0 +1,39 @@
+﻿
+
+@helper RadioYesNo(string name, string label)
+{
+    <div class="form-group">
+        <label class="bold-lbl">@label</label>
+        <br />
+        <div class="form-check-inline">
+            <label class="form-check-label">
+                <input type="radio" name="@name" class="form-check-input">Ja
+            </label>
+        </div>
+        <div class="form-check-inline">
+            <label class="form-check-label">
+                <input type="radio" name="@name" class="form-check-input">Nej
+            </label>
+        </div>
+    </div>
+}
+
+@helper Input(string name, string label = null, string placeholder = null, string value = null)
+{
+    <div class="form-group">
+        <label class="bold-lbl">@label</label>
+        <input type="text" name="@name" class="form-control" placeholder="@placeholder" value="@(value != null ? value : "")">
+    </div>
+}
+
+
+@helper InsuranceBtn(string id, string label, string icon)
+{
+    
+    <div class="col form-group">
+        <div>
+            <input type="image" class="calc-button" style="background-color: white" src="@icon" id="@id" onclick="InsuranceBtnClickEvent(@id)" size="40"/>
+        </div>
+        <label style="color: dodgerblue">@label</label>
+    </div>
+}

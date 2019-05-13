@@ -1,0 +1,69 @@
+﻿@using ASP.Helpers
+
+    <div class="form-group">
+        @CalcHelper.Input("regNum", "Registreringsnummer:", "Reg Nr.")
+        <div class="form-check-inline">
+            <label class="form-check-label">
+                <input type="radio" name="radioCarInsuranceType" class="form-check-input">Bilskifte
+            </label>
+        </div>
+        <div class="form-check-inline">
+            <label class="form-check-label">
+                <input type="radio" name="radioCarInsuranceType" class="form-check-input">Ekstra bil
+            </label>
+        </div>
+    </div>
+    @CalcHelper.RadioYesNo("HasYellowPlate", "Gule nummerplader:")
+    <h1 class="underlined-header">
+        Bil info
+    </h1>
+    <table class="table">
+        <tr>
+            <td>Mærke: </td>
+            <td>DATA </td>
+        </tr>
+        <tr>
+            <td>Model: </td>
+            <td>DATA</td>
+        </tr>
+        <tr>
+            <td>Årgang:</td>
+            <td>DATA</td>
+        </tr>
+    </table>
+    <h1 class="underlined-header">
+        Dækninger
+    </h1>
+
+    <div class="row">
+        @CalcHelper.InsuranceBtn("ResponsibilityAndKasko", "Ansvar og Kasko", "/Content/Icons/BilKasko_Blue.svg")
+    </div>
+    <h1 style="font-size: 20px; margin-bottom: 4px;">
+        Tilvalgsdækninger
+    </h1>
+    <div class="row">
+        @CalcHelper.InsuranceBtn("RoadsideAssistance", "Vejhjælp", "/Content/Icons/BilVejhjaelp_Blue.svg")
+        @CalcHelper.InsuranceBtn("DriversSeatInsurance", "Førepladsdækning", "/Content/Icons/BilFoererpladsdaekning_Blue.svg")
+        @CalcHelper.InsuranceBtn("ExtendedCarInsurance", "Udvidet bildækning", "/Content/Icons/BilUdvidet_Blue.svg")
+        @CalcHelper.InsuranceBtn("ParkingInjury", "Parkeringsskade", "/Content/Icons/Parkeringsskade_Blue.svg")
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col">
+                @CalcHelper.RadioYesNo("extraEquipment", "Har bilen ekstraudstyr for over 24.865 kr?")
+            </div>
+            <div class="col">
+                Vælg selvrisiko
+                <div>
+                    <input type="range" valueAsNumber="" class="form-control-range" name="range" id="rangeId" max="5" min="0" step="1" oninput="GetRangeNum()">
+                </div>
+                <div>
+                    <output style="font-size: medium; margin-left: 10px" name="rangeLbl" id="rangeLblId" for="range">7245</output>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="form-group">
+    <button type="button" class="btn btn-success">Beregn</button>
+</div>
+
