@@ -20,3 +20,22 @@
     font-size: 14px;
     font-weight: bold;
 }
+
+.fixed-basket-box {
+    position: fixed;
+    right: 0;
+    top: 30vh;
+    box-shadow: -.3rem .2rem 1.5rem 0 rgba(45, 89, 102, 0.5);
+    width: 37rem;
+}
+
+.btn.btn-danger.fixed-basket-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10rem;
+    height: inherit;
+    /*display: flex;
+    justify-content: center;
+    align-items: center;*/
+}
