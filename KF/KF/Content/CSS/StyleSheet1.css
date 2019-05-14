@@ -27,7 +27,36 @@
     top: 30vh;
     box-shadow: -.3rem .2rem 1.5rem 0 rgba(45, 89, 102, 0.5);
     width: 37rem;
+    font-size: 14px;
+    font-weight: bold;
+    /*overflow: hidden;
+    word-break: break-all;*/
 }
+
+.fixed-basket-box .row {
+    padding: 15px;
+}
+
+.fixed-basket-box .btn {
+    margin:auto;
+    display:block;
+    width:100%;
+}
+
+.fixed-basket-box-price {
+    display: inline-block;
+    float: right;
+    /*margin-right: .5rem;*/
+}
+.fixed-basket-box-currency {
+    display: inline-block;
+    /*float: right;*/
+    /*margin-right: .5rem;*/
+}
+
+* {
+    box-sizing: border-box
+} 
 
 .btn.btn-danger.fixed-basket-btn {
     position: absolute;
@@ -39,3 +68,4 @@
     justify-content: center;
     align-items: center;*/
 }
+
