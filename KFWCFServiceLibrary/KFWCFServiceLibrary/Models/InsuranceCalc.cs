@@ -1,12 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace KFWCFServiceLibrary.Models
 {
-    class InsuranceCalc
+    public class InsuranceCalc
     {
+ 
+        [DataMember]
+        public Car Car { get; set; }
+        [DataMember]
+        public List<Insurance> Insurances { get; set; }
+        [DataMember]
+        public Customer Customer { get; set; }
+        [DataMember]
+        public double FullPriceWithoutDiscount { get; set; }
+        [DataMember]
+        public double FullPriceWithDiscount { get; set; }
+        [DataMember]
+        public double CarNewPriceDiscount { get; set; }
+        [DataMember]
+        public int SeniorityDiscount { get; set; }
+        [DataMember]
+        public int YearsWithoutCrashDiscount { get; set; }
+        [DataMember]
+        public double ExcessDiscount { get; set; }
+        [DataMember]
+        public int Excess { get; set; }                   //Excess er selvrisiko
     }
 }

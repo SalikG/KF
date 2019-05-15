@@ -17,7 +17,7 @@ namespace KFWCFServiceLibrary.Models
         [DataMember]
         public string Type { get; set; }
         [DataMember]
-        public int NewPrice { get; set; }
+        public double NewPrice { get; set; }
         
     }
 }

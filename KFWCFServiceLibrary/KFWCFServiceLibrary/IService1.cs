@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using KFWCFServiceLibrary.Models;
 
 namespace KFWCFServiceLibrary
 {
@@ -11,11 +12,11 @@ namespace KFWCFServiceLibrary
     [ServiceContract]
     public interface IService1
     {
-        [OperationContract]
-        string GetData(int value);
+        //[OperationContract]
+        //string GetData(int value);
 
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        InsuranceCalc CalculateInsurance(InsuranceCalc insuranceCalc);
 
         // TODO: Add your service operations here
     }
