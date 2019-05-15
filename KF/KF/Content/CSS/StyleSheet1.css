@@ -21,6 +21,13 @@
     font-weight: bold;
 }
 
+
+#leContainer {
+    padding-top: 1rem;
+    padding-right: 8rem;
+    transition: 0.5s;
+}
+
 .fixed-basket-box {
     position: fixed;
     right: 0;
@@ -31,20 +38,12 @@
     font-weight: bold;
     background-color: white;
     transition: 0.5s;
-    /*overflow: hidden;
-    word-break: break-all;*/
 }
 
 #openBasketBtn {
     position: fixed;
     right: 0;
     top: 31vh;
-}
-
-#leContainer {
-    padding-top: 1rem;
-    padding-right: 8rem;
-    transition: 0.5s;
 }
 
 .fixed-basket-box .row {
@@ -58,8 +57,15 @@
 }
 
 .fixed-basket-box-price {
-    display: inline-block;
-    /*float: right;*/
+    text-align: right;
+}
+
+
+.btn.btn-danger.fixed-basket-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10rem;
 }
 
 h3 {
@@ -69,15 +75,4 @@ h3 {
 * {
     box-sizing: border-box
 } 
-
-.btn.btn-danger.fixed-basket-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 10rem;
-    /*height: inherit;*/
-    /*display: flex;
-    justify-content: center;
-    align-items: center;*/
-}
 
