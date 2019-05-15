@@ -1,5 +1,6 @@
 ﻿@using ASP.Helpers
 
+<div id="leContainer">
     <div class="form-group">
         @CalcHelper.Input("regNum", "Registreringsnummer:", "Reg Nr.")
         <div class="form-check-inline">
@@ -66,40 +67,41 @@
     <div class="form-group">
         <button type="button" class="btn btn-success">Beregn</button>
     </div>
-    <div class="fixed-basket-box">
-        <div class="row">
-            <div class="col">
-                <p>Dine beregninger</p>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-danger fixed-basket-btn">Luk</button>
-            </div>
+</div>
+<button type="button" class="btn btn-danger" onclick="openFixedBasketBox()" id ="openBasketBtn"><i class="fa fa-bars"></i> Dine beregninger</button>
+<div class="fixed-basket-box" id="fixedBasket">
+    <div class="row">
+        <div class="col">
+            <h3>Dine beregninger</h3>
         </div>
-        <div class="row">
-            <div class="col">
-                <p>Årlige pris</p>
-            </div>
-            <div class="col">
-                <span class="fixed-basket-box-price">0,00</span>
-                <span class="fixed-basket-box-currency">kr</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <button type="button" class="btn btn-default">Log in med nem id og køb</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p>Andre muligheder</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <button type="button" class="btn btn-info">Gem tilbud</button>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-info">Ring mig op</button>
-            </div>
+        <div class="col">
+            <button type="button" class="btn btn-danger" onclick="closeFixedBasketBox()"><i class="fa fa-close"></i> Luk</button>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <p>Årlige pris</p>
+        </div>
+        <div class="col">
+            <p class="fixed-basket-box-price">0,00 kr</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-secondary">Log in med nem id og køb</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p>Andre muligheder</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-info">Gem tilbud</button>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-info">Ring mig op</button>
+        </div>
+    </div>
+</div>

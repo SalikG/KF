@@ -26,11 +26,25 @@
     right: 0;
     top: 30vh;
     box-shadow: -.3rem .2rem 1.5rem 0 rgba(45, 89, 102, 0.5);
-    width: 37rem;
+    width: 20rem;
     font-size: 14px;
     font-weight: bold;
+    background-color: white;
+    transition: 0.5s;
     /*overflow: hidden;
     word-break: break-all;*/
+}
+
+#openBasketBtn {
+    position: fixed;
+    right: 0;
+    top: 31vh;
+}
+
+#leContainer {
+    padding-top: 1rem;
+    padding-right: 8rem;
+    transition: 0.5s;
 }
 
 .fixed-basket-box .row {
@@ -45,13 +59,11 @@
 
 .fixed-basket-box-price {
     display: inline-block;
-    float: right;
-    /*margin-right: .5rem;*/
-}
-.fixed-basket-box-currency {
-    display: inline-block;
     /*float: right;*/
-    /*margin-right: .5rem;*/
+}
+
+h3 {
+    text-align: center;
 }
 
 * {
@@ -63,7 +75,7 @@
     top: 0;
     right: 0;
     width: 10rem;
-    height: inherit;
+    /*height: inherit;*/
     /*display: flex;
     justify-content: center;
     align-items: center;*/
