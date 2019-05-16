@@ -7,7 +7,7 @@ namespace KFWCFServiceLibrary.Models
         [DataMember]
         public int CustomerId { get; set; }
         [DataMember]
-        public int CprNr { get; set; }
+        public long CprNr { get; set; }
         [DataMember]
         public bool IsPrivateCustomer { get; set; }
         [DataMember]
@@ -21,11 +21,9 @@ namespace KFWCFServiceLibrary.Models
         [DataMember]
         public string City { get; set; }
         [DataMember]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         [DataMember]
         public string Mail { get; set; }
-        [DataMember]
-        public string CustomerTypeDiscount { get; set; }
         [DataMember]
         public int Seniority { get; set; }              //Anciennitet
         [DataMember]

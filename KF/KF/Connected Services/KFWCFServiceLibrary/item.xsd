@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/KFWCFServiceLibrary/Service1/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KFWCFServiceLibrary.Models" />
+  <xs:element name="CalculateInsurance">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KFWCFServiceLibrary.Models" minOccurs="0" name="insuranceCalc" nillable="true" type="q1:InsuranceCalc" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CalculateInsuranceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KFWCFServiceLibrary.Models" minOccurs="0" name="CalculateInsuranceResult" nillable="true" type="q2:InsuranceCalc" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="regNum" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCarResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KFWCFServiceLibrary.Models" minOccurs="0" name="GetCarResult" nillable="true" type="q3:Car" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInsurances">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInsurancesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KFWCFServiceLibrary.Models" minOccurs="0" name="GetInsurancesResult" nillable="true" type="q4:ArrayOfInsurance" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

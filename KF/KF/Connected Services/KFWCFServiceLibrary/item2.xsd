@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/KFWCFServiceLibrary.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/KFWCFServiceLibrary.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="InsuranceCalc">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BeginningDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Car" nillable="true" type="tns:Car" />
+      <xs:element minOccurs="0" name="CarNewPriceDiscount" type="xs:double" />
+      <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer" />
+      <xs:element minOccurs="0" name="Excess" type="xs:int" />
+      <xs:element minOccurs="0" name="ExcessDiscount" type="xs:double" />
+      <xs:element minOccurs="0" name="FullPriceWithDiscount" type="xs:double" />
+      <xs:element minOccurs="0" name="FullPriceWithoutDiscount" type="xs:double" />
+      <xs:element minOccurs="0" name="Insurances" nillable="true" type="tns:ArrayOfInsurance" />
+      <xs:element minOccurs="0" name="SeniorityDiscount" type="xs:int" />
+      <xs:element minOccurs="0" name="YearsWithoutCrashDiscount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="InsuranceCalc" nillable="true" type="tns:InsuranceCalc" />
+  <xs:complexType name="Car">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Brand" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HasYellowPlates" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Model" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewPrice" type="xs:double" />
+      <xs:element minOccurs="0" name="RegNr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Year" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Car" nillable="true" type="tns:Car" />
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CprNr" type="xs:long" />
+      <xs:element minOccurs="0" name="CustomerId" type="xs:int" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPrivateCustomer" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Mail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Seniority" type="xs:int" />
+      <xs:element minOccurs="0" name="YearsWithoutCrash" type="xs:int" />
+      <xs:element minOccurs="0" name="Zipcode" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Customer" nillable="true" type="tns:Customer" />
+  <xs:complexType name="ArrayOfInsurance">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Insurance" nillable="true" type="tns:Insurance" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfInsurance" nillable="true" type="tns:ArrayOfInsurance" />
+  <xs:complexType name="Insurance">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsSelected" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Insurance" nillable="true" type="tns:Insurance" />
+</xs:schema>

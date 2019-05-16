@@ -10,12 +10,7 @@ namespace KFWCFServiceLibrary
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class Service1 : IService1
-    {
-        public string GetData(int value)
-        {
-            return string.Format("You entered: {0}", value);
-        }
-
+    {      
         public InsuranceCalc CalculateInsurance(InsuranceCalc insuranceCalc)
         {
             //Lav udregning med data fra insuranceCalc
@@ -24,6 +19,8 @@ namespace KFWCFServiceLibrary
             {
                 totalYearlyPrice += insurance.Price;
             }
+
+            totalYearlyPrice += insuranceCalc.Car.HasYellowPlates ? 1000 : 0;
 
             insuranceCalc.CarNewPriceDiscount = insuranceCalc.Car.NewPrice < 200000 ? 20 :
                 insuranceCalc.Car.NewPrice < 400000 ? 10 :
@@ -36,13 +33,82 @@ namespace KFWCFServiceLibrary
             insuranceCalc.SeniorityDiscount += insuranceCalc.Customer.Seniority < 2 ? 0 : insuranceCalc.Customer.Seniority < 5 ? 5 : 10;
             insuranceCalc.YearsWithoutCrashDiscount += insuranceCalc.Customer.YearsWithoutCrash < 5 ? 0 : 2;
             insuranceCalc.FullPriceWithDiscount = totalYearlyPrice *
-                                                  ((insuranceCalc.CarNewPriceDiscount +
+                                                  (1 - ((insuranceCalc.CarNewPriceDiscount +
                                                     insuranceCalc.SeniorityDiscount +
                                                     insuranceCalc.YearsWithoutCrashDiscount +
-                                                    insuranceCalc.ExcessDiscount) / 100);
+                                                    insuranceCalc.ExcessDiscount) / 100));
             insuranceCalc.FullPriceWithoutDiscount = totalYearlyPrice;
             return insuranceCalc;
         }
+
+
+
+        public Car GetCar(string regNum)
+        {
+            if (regNum.StartsWith("A"))
+            {
+                return new Car()
+                {
+                    RegNr = regNum,
+                    Brand = "Mercedes",
+                    Model = "A180",
+                    NewPrice = 280000,
+                    Type = "PersonBil",
+                    Year = 2018
+                };
+            }
+            else
+            {
+                return new Car()
+                {
+                    RegNr = regNum,
+                    Brand = "Volvo",
+                    Model = "V70",
+                    NewPrice = 450000,
+                    Type = "PersonBil",
+                    Year = 2016
+                };
+            }
+           
+        }
+
+        public List<Insurance> GetInsurances()
+        {
+            return new List<Insurance>()
+            {
+                new Insurance()
+                {
+                    Name = "Kasko og Ansvar",
+                    Price = 6500,
+                    IsSelected = false
+                },
+                new Insurance()
+                {
+                    Name = "Vejhjælp",
+                    Price = 600,
+                    IsSelected = false
+                },
+                new Insurance()
+                {
+                    Name = "Førepladsdækning",
+                    Price = 400,
+                    IsSelected = false
+                },
+                new Insurance()
+                {
+                    Name = "Udvidet bildækning",
+                    Price = 1000,
+                    IsSelected = false
+                },
+                new Insurance()
+                {
+                    Name = "Parkeringsskade",
+                    Price = 800,
+                    IsSelected = false
+                }
+    };
+        }
+
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {

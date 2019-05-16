@@ -30,5 +30,7 @@ namespace KFWCFServiceLibrary.Models
         public double ExcessDiscount { get; set; }
         [DataMember]
         public int Excess { get; set; }                   //Excess er selvrisiko
+        [DataMember]
+        public DateTime BeginningDate { get; set; }
     }
 }

@@ -12,11 +12,14 @@ namespace KFWCFServiceLibrary
     [ServiceContract]
     public interface IService1
     {
-        //[OperationContract]
-        //string GetData(int value);
-
         [OperationContract]
         InsuranceCalc CalculateInsurance(InsuranceCalc insuranceCalc);
+
+        [OperationContract]
+        Car GetCar(string regNum);
+
+        [OperationContract]
+        List<Insurance> GetInsurances();
 
         // TODO: Add your service operations here
     }

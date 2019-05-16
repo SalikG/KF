@@ -47,10 +47,12 @@
     function InsuranceBtnClickEvent(id) {
         if (document.getElementById(id.id).style.backgroundColor.toString() == "greenyellow") {
             document.getElementById(id.id).style.backgroundColor = "white";
+            document.getElementById(id.id + "CheckBox").checked = false;
 
         }
         else {    
             document.getElementById(id.id).style.backgroundColor = "greenyellow";
+            document.getElementById(id.id + "CheckBox").checked = true;
         }
     }
 
