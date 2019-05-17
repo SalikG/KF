@@ -20,6 +20,8 @@ namespace KFWCFServiceLibrary.Models
         public double NewPrice { get; set; }
         [DataMember]
         public bool HasYellowPlates{ get; set; }
+        [DataMember]
+        public bool ExtraEquipment { get; set; }
 
     }
 }
