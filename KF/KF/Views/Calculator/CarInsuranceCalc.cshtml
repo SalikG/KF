@@ -129,34 +129,26 @@
         </div>
         <div class="row" style="border-bottom: 2px solid;">
             <div class="col-md-auto">
-                <p >Årlige pris før rabat</p>
+                <p >Årlige pris før rabat:</p>
             </div>
             <div class="col">
-                <p class="fixed-basket-box-price">@Model.FullPriceWithoutDiscount</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p>Årlige pris før rabat</p>
-            </div>
-            <div class="col">
-                <p>@Model.FullPriceWithoutDiscount</p>
+                <p class="fixed-basket-box-price">@Model.FullPriceWithoutDiscount kr.</p>
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <p>Årlige pris før rabat</p>
+            <div class="col-md-auto">
+                <p>Rabat:</p>
             </div>
             <div class="col">
-                <p>@Model.FullPriceWithoutDiscount</p>
+                <p class="fixed-basket-box-price">@Model.TotalDiscount %</p>
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <p>Årlige pris før rabat</p>
+            <div class="col-md-auto">
+                <p>Din pris:</p>
             </div>
             <div class="col">
-                <p>@Model.FullPriceWithoutDiscount</p>
+                <p class="fixed-basket-box-price">@Model.FullPriceWithDiscount kr.</p>
             </div>
         </div>
         <div class="row">
