@@ -14,5 +14,7 @@ namespace KF.Repositories
         Car GetCar(string regNum);
 
         Insurance[] GetInsurances();
+
+        int GetExcess();
     }
 }

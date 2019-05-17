@@ -29,6 +29,9 @@ namespace KF.KFWCFServiceLibrary {
         private KF.KFWCFServiceLibrary.Car CarField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool CarChangeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double CarNewPriceDiscountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -51,6 +54,9 @@ namespace KF.KFWCFServiceLibrary {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int SeniorityDiscountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double TotalDiscountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int YearsWithoutCrashDiscountField;
@@ -87,6 +93,19 @@ namespace KF.KFWCFServiceLibrary {
                 if ((object.ReferenceEquals(this.CarField, value) != true)) {
                     this.CarField = value;
                     this.RaisePropertyChanged("Car");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CarChange {
+            get {
+                return this.CarChangeField;
+            }
+            set {
+                if ((this.CarChangeField.Equals(value) != true)) {
+                    this.CarChangeField = value;
+                    this.RaisePropertyChanged("CarChange");
                 }
             }
         }
@@ -196,6 +215,19 @@ namespace KF.KFWCFServiceLibrary {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public double TotalDiscount {
+            get {
+                return this.TotalDiscountField;
+            }
+            set {
+                if ((this.TotalDiscountField.Equals(value) != true)) {
+                    this.TotalDiscountField = value;
+                    this.RaisePropertyChanged("TotalDiscount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int YearsWithoutCrashDiscount {
             get {
                 return this.YearsWithoutCrashDiscountField;
@@ -229,6 +261,9 @@ namespace KF.KFWCFServiceLibrary {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string BrandField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ExtraEquipmentField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool HasYellowPlatesField;
@@ -267,6 +302,19 @@ namespace KF.KFWCFServiceLibrary {
                 if ((object.ReferenceEquals(this.BrandField, value) != true)) {
                     this.BrandField = value;
                     this.RaisePropertyChanged("Brand");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ExtraEquipment {
+            get {
+                return this.ExtraEquipmentField;
+            }
+            set {
+                if ((this.ExtraEquipmentField.Equals(value) != true)) {
+                    this.ExtraEquipmentField = value;
+                    this.RaisePropertyChanged("ExtraEquipment");
                 }
             }
         }
@@ -678,6 +726,12 @@ namespace KF.KFWCFServiceLibrary {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetInsurances", ReplyAction="http://tempuri.org/IService1/GetInsurancesResponse")]
         System.Threading.Tasks.Task<KF.KFWCFServiceLibrary.Insurance[]> GetInsurancesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetExcess", ReplyAction="http://tempuri.org/IService1/GetExcessResponse")]
+        int GetExcess();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetExcess", ReplyAction="http://tempuri.org/IService1/GetExcessResponse")]
+        System.Threading.Tasks.Task<int> GetExcessAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -729,6 +783,14 @@ namespace KF.KFWCFServiceLibrary {
         
         public System.Threading.Tasks.Task<KF.KFWCFServiceLibrary.Insurance[]> GetInsurancesAsync() {
             return base.Channel.GetInsurancesAsync();
+        }
+        
+        public int GetExcess() {
+            return base.Channel.GetExcess();
+        }
+        
+        public System.Threading.Tasks.Task<int> GetExcessAsync() {
+            return base.Channel.GetExcessAsync();
         }
     }
 }

@@ -20,9 +20,16 @@ namespace KF.Repositories
             return client.GetCar(regNum);
         }
 
+        public int GetExcess()
+        {
+            return client.GetExcess();
+        }
+
         public Insurance[] GetInsurances()
         {
             return client.GetInsurances();
         }
+
+
     }
 }

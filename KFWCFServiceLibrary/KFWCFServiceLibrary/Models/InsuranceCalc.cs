@@ -35,5 +35,7 @@ namespace KFWCFServiceLibrary.Models
         public DateTime BeginningDate { get; set; }
         [DataMember]
         public bool CarChange { get; set; }
+        [DataMember]
+        public double TotalDiscount { get; set; }
     }
 }
