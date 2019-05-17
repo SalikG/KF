@@ -48,7 +48,7 @@
 }
 
 .fixed-basket-box .row {
-    padding: 15px;
+    margin: 10px;
 }
 
 .fixed-basket-box .btn {
@@ -58,8 +58,7 @@
 }
 
 .fixed-basket-box-price {
-    display: inline-block;
-    /*float: right;*/
+    text-align: right;
 }
 
 h3 {
@@ -115,6 +114,7 @@ h3 {
 }
 
 .hide {
-    /*display: none;*/
+    display: none;
 }
+
 
