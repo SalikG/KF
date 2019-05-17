@@ -12,11 +12,14 @@
             </div>
             <div class="form-check-inline">
                 <label class="form-check-label">
+                    @*@Html.RadioButtonFor(model => model.CarChange, "True")Bilskifte*@
                     <input type="radio" name="radioCarInsuranceType" class="form-check-input">Bilskifte
                 </label>
             </div>
             <div class="form-check-inline">
                 <label class="form-check-label">
+                    @*@Html.RadioButtonFor(model => model.CarChange, "False")Ekstra bil*@
+
                     <input type="radio" name="radioCarInsuranceType" class="form-check-input">Ekstra bil
                 </label>
             </div>
@@ -80,6 +83,20 @@
         <div class="form-group">
             <div class="row">
                 <div class="col">
+                    @*<div class="form-group">
+                        <label class="bold-lbl">Har bilen ekstraudstyr for over 24.865 kr?</label>
+                        <br />
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                @Html.RadioButtonFor(model => model.Car.ExtraEquipment, "True")Ja
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                @Html.RadioButtonFor(model => model.Car.ExtraEquipment, "False")Nej      
+                            </label>
+                        </div>
+                    </div>*@
                     @CalcHelper.RadioYesNo("extraEquipment", "Har bilen ekstraudstyr for over 24.865 kr?")
                 </div>
                 <div class="col">
@@ -87,8 +104,11 @@
                     <div>
                         <input type="range" valueAsNumber="" class="form-control-range" name="range" id="rangeId" max="5" min="0" step="1" oninput="GetRangeNum()">
                     </div>
+
                     <div>
-                        <output style="font-size: medium; margin-left: 10px" name="rangeLbl" id="rangeLblId" for="range">7245</output>
+                        @*<output style="font-size: medium; margin-left: 10px" name="rangeLbl" id="rangeLblId" for="range">7245</output>*@
+                        @Html.LabelFor(model => model.Excess, Model.Excess.ToString(), 
+                            new {style = "font-size: medium; margin - left: 10px", id = "rangeLblId", @for = "rangeId"})
                     </div>
                 </div>
             </div>
@@ -107,12 +127,36 @@
                 <button type="button" class="btn btn-danger" onclick="closeFixedBasketBox()"><i class="fa fa-close"></i> Luk</button>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <p>Årlige pris</p>
+        <div class="row" style="border-bottom: 2px solid;">
+            <div class="col-md-auto">
+                <p >Årlige pris før rabat</p>
             </div>
             <div class="col">
-                <p class="fixed-basket-box-price">0,00 kr</p>
+                <p class="fixed-basket-box-price">@Model.FullPriceWithoutDiscount</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Årlige pris før rabat</p>
+            </div>
+            <div class="col">
+                <p>@Model.FullPriceWithoutDiscount</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Årlige pris før rabat</p>
+            </div>
+            <div class="col">
+                <p>@Model.FullPriceWithoutDiscount</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Årlige pris før rabat</p>
+            </div>
+            <div class="col">
+                <p>@Model.FullPriceWithoutDiscount</p>
             </div>
         </div>
         <div class="row">
@@ -128,9 +172,9 @@
         <div class="row">
             <div class="col">
                 <input type="submit" name="action" class="btn btn-info" value="Gem tilbud"/>
-                <div class="col">
-                    <button type="button" class="btn btn-info">Ring mig op</button>
-                </div>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-info">Ring mig op</button>
             </div>
         </div>
     </div>
