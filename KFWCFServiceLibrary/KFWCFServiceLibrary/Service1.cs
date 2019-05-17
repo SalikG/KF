@@ -82,7 +82,7 @@ namespace KFWCFServiceLibrary
             {
                 new Insurance()
                 {
-                    Name = "Kasko og Ansvar",
+                    Name = "Ansvar og Kasko",
                     Price = 6500,
                     IsSelected = true
                 },

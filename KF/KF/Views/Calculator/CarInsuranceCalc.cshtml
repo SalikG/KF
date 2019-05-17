@@ -1,7 +1,7 @@
 ﻿@using ASP.Helpers
 @using KF.KFWCFServiceLibrary
 @model KF.KFWCFServiceLibrary.InsuranceCalc
-@using (Html.BeginForm("CarInsuranceCalc", "Calculator", FormMethod.Post))
+@using (Html.BeginForm("CarInsuranceCalc", "Calculator", FormMethod.Post, new { onsubmit="return validateForm()"}))
 {
     <div id="leContainer">
 
@@ -58,23 +58,23 @@
      
 
         <div class="row">
-            @Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Ansvar og Kasko").IsSelected, new { id = "ResponsibilityAndKaskoCheckBox",  @class = "hide" })
+            @*@Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Ansvar og Kasko").IsSelected, new { id = "ResponsibilityAndKaskoCheckBox",  @class = "hide" })*@
             @CalcHelper.InsuranceBtn("ResponsibilityAndKasko", "Ansvar og Kasko", "/Content/Icons/BilKasko_Blue.svg")
         </div>
         <h1 style="font-size: 20px; margin-bottom: 4px;">
             Tilvalgsdækninger
         </h1>
         <div class="row">
-            @Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Vejhjælp").IsSelected, new { id = "RoadsideAssistanceCheckBox",  @class = "hide" })
+            @*@Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Vejhjælp").IsSelected, new { id = "RoadsideAssistanceCheckBox",  @class = "hide" })*@
             @CalcHelper.InsuranceBtn("RoadsideAssistance", "Vejhjælp", "/Content/Icons/BilVejhjaelp_Blue.svg")
 
-            @Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Førepladsdækning").IsSelected, new { id = "DriversSeatInsuranceCheckBox",  @class = "hide" })
+            @*@Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Førepladsdækning").IsSelected, new { id = "DriversSeatInsuranceCheckBox",  @class = "hide" })*@
             @CalcHelper.InsuranceBtn("DriversSeatInsurance", "Førepladsdækning", "/Content/Icons/BilFoererpladsdaekning_Blue.svg")
 
-            @Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Udvidet bildækning").IsSelected, new { id = "ExtendedCarInsuranceCheckBox",  @class = "hide" })
+            @*@Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Udvidet bildækning").IsSelected, new { id = "ExtendedCarInsuranceCheckBox",  @class = "hide" })*@
             @CalcHelper.InsuranceBtn("ExtendedCarInsurance", "Udvidet bildækning", "/Content/Icons/BilUdvidet_Blue.svg")
 
-            @Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Parkeringsskade").IsSelected, new { id = "ParkingInjuryCheckBox",  @class = "hide" })
+            @*@Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Parkeringsskade").IsSelected, new { id = "ParkingInjuryCheckBox",  @class = "hide" })*@
             @CalcHelper.InsuranceBtn("ParkingInjury", "Parkeringsskade", "/Content/Icons/Parkeringsskade_Blue.svg")
         </div>
         <div class="form-group">
@@ -94,7 +94,7 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="submit" name="action" class="btn btn-success" value="Beregn"/>
+            <input type="submit" name="action" class="btn btn-success" value="Beregn" id="calcBtn"/>
         </div>
     </div>
     <button type="button" class="btn btn-danger" onclick="openFixedBasketBox()" id="openBasketBtn"><i class="fa fa-bars"></i> Dine beregninger</button>

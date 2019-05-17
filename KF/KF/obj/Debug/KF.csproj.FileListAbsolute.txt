@@ -175,7 +175,6 @@ C:\Users\Koenjolleh\Desktop\Programmering\Datamatiker Afslutningsopgave\KF\KF\KF
 C:\Users\Koenjolleh\Desktop\Programmering\Datamatiker Afslutningsopgave\KF\KF\KF\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Koenjolleh\Desktop\Programmering\Datamatiker Afslutningsopgave\KF\KF\KF\bin\Microsoft.AI.Web.xml
 C:\Users\Koenjolleh\Desktop\Programmering\Datamatiker Afslutningsopgave\KF\KF\KF\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Koenjolleh\Desktop\Programmering\Datamatiker Afslutningsopgave\KF\KF\KF\obj\Debug\KF.csprojAssemblyReference.cache
 C:\Users\Koenjolleh\Desktop\Programmering\Datamatiker Afslutningsopgave\KF\KF\KF\obj\Debug\KF.csproj.CoreCompileInputs.cache
 C:\Users\Koenjolleh\Desktop\Programmering\Datamatiker Afslutningsopgave\KF\KF\KF\obj\Debug\KF.csproj.CopyComplete
 C:\Users\Koenjolleh\Desktop\Programmering\Datamatiker Afslutningsopgave\KF\KF\KF\obj\Debug\KF.dll
@@ -271,3 +270,4 @@ C:\Users\Mehmet\Desktop\Computer Science KEA\KF\KF\KF\KF\obj\Debug\KF.csproj.Cor
 C:\Users\Mehmet\Desktop\Computer Science KEA\KF\KF\KF\KF\obj\Debug\KF.csproj.CopyComplete
 C:\Users\Mehmet\Desktop\Computer Science KEA\KF\KF\KF\KF\obj\Debug\KF.dll
 C:\Users\Mehmet\Desktop\Computer Science KEA\KF\KF\KF\KF\obj\Debug\KF.pdb
+C:\Users\Koenjolleh\Desktop\Programmering\Datamatiker Afslutningsopgave\KF\KF\KF\obj\Debug\KF.csprojAssemblyReference.cache
