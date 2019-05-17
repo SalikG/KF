@@ -30,7 +30,7 @@ namespace KF.Controllers
         // GET: Calculator
         public ActionResult CarInsuranceCalc()
         {
-            return View(new InsuranceCalc(){Customer = Customer, Insurances = _repository.GetInsurances()});
+            return View(new InsuranceCalc(){Customer = Customer, Insurances = _repository.GetInsurances(), Excess = _repository.});
         }
 
         [HttpPost]

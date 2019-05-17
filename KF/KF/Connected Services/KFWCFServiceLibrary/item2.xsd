@@ -4,6 +4,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="BeginningDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Car" nillable="true" type="tns:Car" />
+      <xs:element minOccurs="0" name="CarChange" type="xs:boolean" />
       <xs:element minOccurs="0" name="CarNewPriceDiscount" type="xs:double" />
       <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer" />
       <xs:element minOccurs="0" name="Excess" type="xs:int" />
@@ -12,6 +13,7 @@
       <xs:element minOccurs="0" name="FullPriceWithoutDiscount" type="xs:double" />
       <xs:element minOccurs="0" name="Insurances" nillable="true" type="tns:ArrayOfInsurance" />
       <xs:element minOccurs="0" name="SeniorityDiscount" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalDiscount" type="xs:double" />
       <xs:element minOccurs="0" name="YearsWithoutCrashDiscount" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
@@ -19,6 +21,7 @@
   <xs:complexType name="Car">
     <xs:sequence>
       <xs:element minOccurs="0" name="Brand" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExtraEquipment" type="xs:boolean" />
       <xs:element minOccurs="0" name="HasYellowPlates" type="xs:boolean" />
       <xs:element minOccurs="0" name="Model" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NewPrice" type="xs:double" />

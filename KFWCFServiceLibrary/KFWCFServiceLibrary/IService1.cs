@@ -21,6 +21,9 @@ namespace KFWCFServiceLibrary
         [OperationContract]
         List<Insurance> GetInsurances();
 
+        [OperationContract]
+        int GetExcess();
+
         // TODO: Add your service operations here
     }
 

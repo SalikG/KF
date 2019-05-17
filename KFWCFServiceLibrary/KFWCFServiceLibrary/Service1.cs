@@ -37,6 +37,10 @@ namespace KFWCFServiceLibrary
                                                     insuranceCalc.SeniorityDiscount +
                                                     insuranceCalc.YearsWithoutCrashDiscount +
                                                     insuranceCalc.ExcessDiscount) / 100));
+            insuranceCalc.TotalDiscount = (insuranceCalc.CarNewPriceDiscount +
+                                                    insuranceCalc.SeniorityDiscount +
+                                                    insuranceCalc.YearsWithoutCrashDiscount +
+                                                    insuranceCalc.ExcessDiscount);
             insuranceCalc.FullPriceWithoutDiscount = totalYearlyPrice;
             return insuranceCalc;
         }
@@ -80,7 +84,7 @@ namespace KFWCFServiceLibrary
                 {
                     Name = "Kasko og Ansvar",
                     Price = 6500,
-                    IsSelected = false
+                    IsSelected = true
                 },
                 new Insurance()
                 {
@@ -98,7 +102,7 @@ namespace KFWCFServiceLibrary
                 {
                     Name = "Udvidet bildækning",
                     Price = 1000,
-                    IsSelected = false
+                    IsSelected = true
                 },
                 new Insurance()
                 {
@@ -106,9 +110,13 @@ namespace KFWCFServiceLibrary
                     Price = 800,
                     IsSelected = false
                 }
-    };
+            };
         }
 
+        public int GetExcess()
+        {
+            return 4611;
+        }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {

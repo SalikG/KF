@@ -25,6 +25,12 @@
   <wsdl:message name="IService1_GetInsurances_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetInsurancesResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetExcess_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetExcess" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetExcess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetExcessResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="CalculateInsurance">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CalculateInsurance" message="tns:IService1_CalculateInsurance_InputMessage" />
@@ -37,6 +43,10 @@
     <wsdl:operation name="GetInsurances">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetInsurances" message="tns:IService1_GetInsurances_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetInsurancesResponse" message="tns:IService1_GetInsurances_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExcess">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetExcess" message="tns:IService1_GetExcess_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetExcessResponse" message="tns:IService1_GetExcess_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -61,6 +71,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetInsurances">
       <soap:operation soapAction="http://tempuri.org/IService1/GetInsurances" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExcess">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetExcess" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
