@@ -1,10 +1,15 @@
 ﻿@using ASP.Helpers
 @using KF.KFWCFServiceLibrary
+@using Microsoft.Ajax.Utilities
 @model KF.KFWCFServiceLibrary.InsuranceCalc
-@using (Html.BeginForm("CarInsuranceCalc", "Calculator", FormMethod.Post))
+@using (Html.BeginForm("CarInsuranceCalc", "Calculator", FormMethod.Post, Model))
 {
+    for (int i = 0; i < Model.Insurances.Length; i++)
+     {
+         @Html.HiddenFor(model => model.Insurances[i].Name);
+         @Html.HiddenFor(model => model.Insurances[i].Price)
+     }
     <div id="leContainer">
-
         <div class="form-group">
             <div >
                 @Html.EditorFor(model => model.Car.RegNr, new {htmlAttributes = new {@class = "form-control"}})
@@ -12,15 +17,15 @@
             </div>
             <div class="form-check-inline">
                 <label class="form-check-label">
-                    @*@Html.RadioButtonFor(model => model.CarChange, "True")Bilskifte*@
-                    <input type="radio" name="radioCarInsuranceType" class="form-check-input">Bilskifte
+                    @Html.RadioButtonFor(model => model.CarChange, "True")Bilskifte
+                    @*<input type="radio" name="radioCarInsuranceType" class="form-check-input">Bilskifte*@
                 </label>
             </div>
             <div class="form-check-inline">
                 <label class="form-check-label">
-                    @*@Html.RadioButtonFor(model => model.CarChange, "False")Ekstra bil*@
+                    @Html.RadioButtonFor(model => model.CarChange, "False")Ekstra bil
 
-                    <input type="radio" name="radioCarInsuranceType" class="form-check-input">Ekstra bil
+                    @*<input type="radio" name="radioCarInsuranceType" class="form-check-input">Ekstra bil*@
                 </label>
             </div>
         </div>
@@ -44,46 +49,65 @@
         <table class="table">
             <tr>
                 <td>Mærke: </td>
-                <td>@Model.Car?.Brand</td>
+                <td>@(Model.Car?.Brand ?? "")</td>
             </tr>
             <tr>
                 <td>Model: </td>
-                <td>@Model.Car?.Model</td>
+                <td>@(Model.Car?.Model ?? "")</td>
             </tr>
             <tr>
                 <td>Årgang:</td>
-                <td>@Model.Car?.Year</td>
+                <td>@(Model.Car?.Year ?? 0)</td>
             </tr>
         </table>
         <h1 class="underlined-header">
             Dækninger
         </h1>
-     
 
-        <div class="row">
-            @Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Ansvar og Kasko").IsSelected, new { id = "ResponsibilityAndKaskoCheckBox",  @class = "hide" })
+        <div class="row disabled">
+            @{
+                int responsibilityAndKaskoIndexOf = Array.IndexOf(Model.Insurances,
+                    Model.Insurances.FirstOrDefault(i => i.Name == "Ansvar og Kasko"));
+            }
+            @Html.CheckBoxFor(model => model.Insurances[responsibilityAndKaskoIndexOf].IsSelected, new { id = "ResponsibilityAndKaskoCheckBox", @class = "hide" })
             @CalcHelper.InsuranceBtn("ResponsibilityAndKasko", "Ansvar og Kasko", "/Content/Icons/BilKasko_Blue.svg")
         </div>
         <h1 style="font-size: 20px; margin-bottom: 4px;">
             Tilvalgsdækninger
         </h1>
         <div class="row">
-            @Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Vejhjælp").IsSelected, new { id = "RoadsideAssistanceCheckBox",  @class = "hide" })
+            @{
+                int roadsideAssistanceIndexOf = Array.IndexOf(Model.Insurances,
+                    Model.Insurances.FirstOrDefault(i => i.Name == "Vejhjælp"));
+            }
+            @Html.CheckBoxFor(model => model.Insurances[roadsideAssistanceIndexOf].IsSelected, new { id = "RoadsideAssistanceCheckBox", @class = "hide" })
             @CalcHelper.InsuranceBtn("RoadsideAssistance", "Vejhjælp", "/Content/Icons/BilVejhjaelp_Blue.svg")
-
-            @Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Førepladsdækning").IsSelected, new { id = "DriversSeatInsuranceCheckBox",  @class = "hide" })
+            
+            @{
+                int driversSeatInsuranceIndexOf = Array.IndexOf(Model.Insurances,
+                    Model.Insurances.FirstOrDefault(i => i.Name == "Førepladsdækning"));
+            }
+            @Html.CheckBoxFor(model => model.Insurances[driversSeatInsuranceIndexOf].IsSelected, new { id = "DriversSeatInsuranceCheckBox", @class = "hide" })
             @CalcHelper.InsuranceBtn("DriversSeatInsurance", "Førepladsdækning", "/Content/Icons/BilFoererpladsdaekning_Blue.svg")
-
-            @Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Udvidet bildækning").IsSelected, new { id = "ExtendedCarInsuranceCheckBox",  @class = "hide" })
+            
+            @{
+                int extendedCarInsuranceIndexOf = Array.IndexOf(Model.Insurances,
+                    Model.Insurances.FirstOrDefault(i => i.Name == "Udvidet bildækning"));
+            }
+            @Html.CheckBoxFor(model => model.Insurances[extendedCarInsuranceIndexOf].IsSelected, new { id = "ExtendedCarInsuranceCheckBox", @class = "hide" })
             @CalcHelper.InsuranceBtn("ExtendedCarInsurance", "Udvidet bildækning", "/Content/Icons/BilUdvidet_Blue.svg")
-
-            @Html.CheckBoxFor(model => model.Insurances.FirstOrDefault(i => i.Name == "Parkeringsskade").IsSelected, new { id = "ParkingInjuryCheckBox",  @class = "hide" })
+            
+            @{
+                int parkingInjuryIndexOf = Array.IndexOf(Model.Insurances,
+                    Model.Insurances.FirstOrDefault(i => i.Name == "Parkeringsskade"));
+            }
+            @Html.CheckBoxFor(model => model.Insurances[parkingInjuryIndexOf].IsSelected, new { id = "ParkingInjuryCheckBox", @class = "hide" })
             @CalcHelper.InsuranceBtn("ParkingInjury", "Parkeringsskade", "/Content/Icons/Parkeringsskade_Blue.svg")
         </div>
         <div class="form-group">
             <div class="row">
                 <div class="col">
-                    @*<div class="form-group">
+                    <div class="form-group">
                         <label class="bold-lbl">Har bilen ekstraudstyr for over 24.865 kr?</label>
                         <br />
                         <div class="form-check-inline">
@@ -96,8 +120,8 @@
                                 @Html.RadioButtonFor(model => model.Car.ExtraEquipment, "False")Nej      
                             </label>
                         </div>
-                    </div>*@
-                    @CalcHelper.RadioYesNo("extraEquipment", "Har bilen ekstraudstyr for over 24.865 kr?")
+                    </div>
+                    @*@CalcHelper.RadioYesNo("extraEquipment", "Har bilen ekstraudstyr for over 24.865 kr?")*@
                 </div>
                 <div class="col">
                     Vælg selvrisiko
@@ -106,8 +130,8 @@
                     </div>
 
                     <div>
-                        @*<output style="font-size: medium; margin-left: 10px" name="rangeLbl" id="rangeLblId" for="range">7245</output>*@
-                        @Html.LabelFor(model => model.Excess, Model.Excess.ToString(), 
+                        @Html.HiddenFor(model => model.Excess)
+                        @Html.LabelFor(model => model.Excess, Model.Excess.ToString(),
                             new {style = "font-size: medium; margin - left: 10px", id = "rangeLblId", @for = "rangeId"})
                     </div>
                 </div>
@@ -171,3 +195,61 @@
         </div>
     </div>
 }
+<script>
+    function InsuranceBtnClickEvent(id) {
+        if (document.getElementById(id.id).style.backgroundColor.toString() == "greenyellow") {
+            document.getElementById(id.id).style.backgroundColor = "white";
+            document.getElementById(id.id + "CheckBox").checked = false;
+
+        }
+        else {    
+            document.getElementById(id.id).style.backgroundColor = "greenyellow";
+            document.getElementById(id.id + "CheckBox").checked = true;
+        }
+    }
+
+    function InitializeInsuranceButtons() {
+        if (document.getElementById("ResponsibilityAndKaskoCheckBox").checked == false) {
+            document.getElementById("ResponsibilityAndKasko").style.backgroundColor = "white";
+        }
+        else {    
+            document.getElementById("ResponsibilityAndKasko").style.backgroundColor = "greenyellow";
+        }
+
+        if (document.getElementById("RoadsideAssistanceCheckBox").checked == false) {
+            document.getElementById("RoadsideAssistance").style.backgroundColor = "white";
+        }
+        else {    
+            document.getElementById("RoadsideAssistance").style.backgroundColor = "greenyellow";
+        }
+
+        if (document.getElementById("DriversSeatInsuranceCheckBox").checked == false) {
+            document.getElementById("DriversSeatInsurance").style.backgroundColor = "white";
+        }
+        else {    
+            document.getElementById("DriversSeatInsurance").style.backgroundColor = "greenyellow";
+        }
+
+        if (document.getElementById("ExtendedCarInsuranceCheckBox").checked == false) {
+            document.getElementById("ExtendedCarInsurance").style.backgroundColor = "white";
+        }
+        else {    
+            document.getElementById("ExtendedCarInsurance").style.backgroundColor = "greenyellow";
+        }
+
+        if (document.getElementById("ParkingInjuryCheckBox").checked == false) {
+            document.getElementById("ParkingInjury").style.backgroundColor = "white";
+        }
+        else {    
+            document.getElementById("ParkingInjury").style.backgroundColor = "greenyellow";
+        }
+    }
+
+    InitializeInsuranceButtons();
+    //InsuranceBtnClickEvent(document.getElementById("ResponsibilityAndKasko"));
+    //InsuranceBtnClickEvent(document.getElementById("RoadsideAssistance"));
+    //InsuranceBtnClickEvent(document.getElementById("DriversSeatInsurance"));
+    //InsuranceBtnClickEvent(document.getElementById("ExtendedCarInsurance"));
+    //InsuranceBtnClickEvent(document.getElementById("ParkingInjury"));
+
+</script>

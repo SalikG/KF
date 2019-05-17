@@ -30,16 +30,25 @@ namespace KF.Controllers
         // GET: Calculator
         public ActionResult CarInsuranceCalc()
         {
-            return View(new InsuranceCalc(){Customer = Customer, Insurances = _repository.GetInsurances(), Excess = _repository.});
+            InsuranceCalc insuranceCalc = new InsuranceCalc()
+                {Customer = Customer, Insurances = _repository.GetInsurances(), Excess = _repository.GetExcess()};
+ 
+            return View(insuranceCalc);
         }
 
         [HttpPost]
         public ActionResult CarInsuranceCalc(InsuranceCalc insuranceCalc, string action)
         {
-       
-                //insuranceCalc.Car = _repository.GetCar(insuranceCalc.Car.RegNr);
-            
-                System.Diagnostics.Debug.WriteLine(insuranceCalc.Insurances[0].IsSelected);
+            if (insuranceCalc.Car == null) return View("CarInsuranceCalc", insuranceCalc);
+
+            if (action == "Søg")
+            {
+                insuranceCalc.Car = _repository.GetCar(insuranceCalc.Car.RegNr);
+                return View("CarInsuranceCalc", insuranceCalc);
+            }
+
+
+            System.Diagnostics.Debug.WriteLine(insuranceCalc.Insurances[0].IsSelected);
                 System.Diagnostics.Debug.WriteLine(insuranceCalc.Insurances[1].IsSelected);
                 System.Diagnostics.Debug.WriteLine(insuranceCalc.Insurances[2].IsSelected);
                 System.Diagnostics.Debug.WriteLine(insuranceCalc.Insurances[3].IsSelected);
