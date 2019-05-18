@@ -80,32 +80,6 @@ h3 {
     align-items: center;*/
 }
 
-.search input[type=text] {
-    padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
-}
-
-/* Style the submit button */
-.search button {
-  float: left;
-  width: 20%;
-  padding: 10px;
-  background: #2196F3;
-  color: white;
-  font-size: 17px;
-  border: 1px solid grey;
-  border-left: none; /* Prevent double borders */
-  cursor: pointer;
-}
-
-.search button:hover {
-    background: #0b7dda;
-}
-
 /* Clear floats */
 .search::after {
     content: "";
@@ -115,6 +89,10 @@ h3 {
 
 .hide {
     display: none;
+}
+
+.small-width {
+    max-width: 10px;
 }
 
 

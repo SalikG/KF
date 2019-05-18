@@ -39,21 +39,19 @@ namespace KF.Controllers
         [HttpPost]
         public ActionResult CarInsuranceCalc(InsuranceCalc insuranceCalc, string action)
         {
+            ModelState.Clear();
+            insuranceCalc.Customer = Customer;
             if (insuranceCalc.Car == null) return View("CarInsuranceCalc", insuranceCalc);
 
             if (action == "Søg")
             {
+                if (insuranceCalc.Car.RegNr == null) return View("CarInsuranceCalc", insuranceCalc);
                 insuranceCalc.Car = _repository.GetCar(insuranceCalc.Car.RegNr);
                 return View("CarInsuranceCalc", insuranceCalc);
             }
 
-
-            System.Diagnostics.Debug.WriteLine(insuranceCalc.Insurances[0].IsSelected);
-                System.Diagnostics.Debug.WriteLine(insuranceCalc.Insurances[1].IsSelected);
-                System.Diagnostics.Debug.WriteLine(insuranceCalc.Insurances[2].IsSelected);
-                System.Diagnostics.Debug.WriteLine(insuranceCalc.Insurances[3].IsSelected);
-     
-            return View("CarInsuranceCalc", insuranceCalc);
+            var insuranceOffer = _repository.CalculateInsurance(insuranceCalc);
+            return View("CarInsuranceCalc", insuranceOffer);
         }
     }
 }
