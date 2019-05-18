@@ -9,7 +9,8 @@ namespace KFWCFServiceLibrary.Models
 {
     public class InsuranceCalc
     {
- 
+        private int _excess = 7245;
+
         [DataMember]
         public Car Car { get; set; }
         [DataMember]
@@ -29,6 +30,12 @@ namespace KFWCFServiceLibrary.Models
         [DataMember]
         public double ExcessDiscount { get; set; }
         [DataMember]
-        public int Excess { get; set; }                   //Excess er selvrisiko
+        public int Excess { get => _excess; set => _excess = value; }                   //Excess er selvrisiko
+        [DataMember]
+        public DateTime BeginningDate { get; set; }
+        [DataMember]
+        public bool CarChange { get; set; }
+        [DataMember]
+        public double TotalDiscount { get; set; }
     }
 }

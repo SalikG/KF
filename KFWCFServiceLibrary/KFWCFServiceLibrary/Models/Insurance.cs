@@ -12,12 +12,8 @@ namespace KFWCFServiceLibrary.Models
         [DataMember]
         public string Name { get; set; }
         [DataMember]
-        public string TypeOfInsurance { get; set; }
-        [DataMember]
         public int Price { get; set; }
         [DataMember]
-        public DateTime BeginningDate { get; set; }
-        [DataMember]
-        public string Status { get; set; }
+        public bool IsSelected { get; set; }
     }
 }

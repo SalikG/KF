@@ -36,24 +36,6 @@
 @RenderSection("scripts", required: false)
 <script type="text/javascript">
 
-    function GetRangeNum() {
-        var index = document.getElementById('rangeId');
-        var rangeNums = ["0", "2305", "4611", "7245", "9881", "12514"];
-        document.getElementById('rangeLblId').innerHTML = rangeNums[parseInt(index.value)];
-        console.log(parseInt(index.value));
-        console.log(index.value);
-    }
-
-    function InsuranceBtnClickEvent(id) {
-        if (document.getElementById(id.id).style.backgroundColor.toString() == "greenyellow") {
-            document.getElementById(id.id).style.backgroundColor = "white";
-
-        }
-        else {    
-            document.getElementById(id.id).style.backgroundColor = "greenyellow";
-        }
-    }
-
     function openFixedBasketBox() {
         document.getElementById("fixedBasket").style.width = "20rem";
         document.getElementById("leContainer").style.paddingRight = "8rem";
