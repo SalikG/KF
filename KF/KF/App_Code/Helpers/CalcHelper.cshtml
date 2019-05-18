@@ -18,11 +18,11 @@
     </div>
 }
 
-@helper Input(string name, string label = null, string placeholder = null, string value = null)
+@helper Input(string name, string label = null, string placeholder = null, string value = null, string classes = null)
 {
     <div class="form-group">
         <label class="bold-lbl">@label</label>
-        <input type="text" name="@name" class="form-control" placeholder="@placeholder" value="@(value != null ? value : "")">
+        <input type="text" name="@name" class="form-control @classes" placeholder="@placeholder" value="@(value != null ? value : "")">
     </div>
 }
 
@@ -32,7 +32,7 @@
     
     <div class="col form-group">
         <div>
-            <input type="image" class="calc-button" style="background-color: white" src="@icon" id="@id" onclick="InsuranceBtnClickEvent(@id)" size="40"/>
+            <button type="button" class="calc-button" style="background-color: white; background: url(@icon)" id="@id" onclick="InsuranceBtnClickEvent(@id)" size="40"></button>
         </div>
         <label style="color: dodgerblue">@label</label>
     </div>
