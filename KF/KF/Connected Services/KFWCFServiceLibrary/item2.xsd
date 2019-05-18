@@ -21,8 +21,8 @@
   <xs:complexType name="Car">
     <xs:sequence>
       <xs:element minOccurs="0" name="Brand" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ExtraEquipment" type="xs:boolean" />
-      <xs:element minOccurs="0" name="HasYellowPlates" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ExtraEquipment" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasYellowPlates" nillable="true" type="xs:boolean" />
       <xs:element minOccurs="0" name="Model" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NewPrice" type="xs:double" />
       <xs:element minOccurs="0" name="RegNr" nillable="true" type="xs:string" />

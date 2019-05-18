@@ -20,7 +20,7 @@ namespace KFWCFServiceLibrary
                 totalYearlyPrice += insurance.Price;
             }
 
-            totalYearlyPrice += insuranceCalc.Car.HasYellowPlates ? 1000 : 0;
+            totalYearlyPrice += insuranceCalc.Car.HasYellowPlates.GetValueOrDefault() ? 1000 : 0;
 
             insuranceCalc.CarNewPriceDiscount = insuranceCalc.Car.NewPrice < 200000 ? 20 :
                 insuranceCalc.Car.NewPrice < 400000 ? 10 :
