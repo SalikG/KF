@@ -36,13 +36,6 @@
 @RenderSection("scripts", required: false)
 <script type="text/javascript">
 
-    // Giver det mening at have disse scripts i layout når de kun bliver brugt på insurance calc?
-    function GetRangeNum() {
-        var index = document.getElementById('rangeId');
-        var rangeNums = ["0", "2305", "4611", "7245", "9881", "12514"];
-        document.getElementById('rangeLblId').innerHTML = rangeNums[parseInt(index.value)];
-    }
-
     function openFixedBasketBox() {
         document.getElementById("fixedBasket").style.width = "20rem";
         document.getElementById("leContainer").style.paddingRight = "8rem";

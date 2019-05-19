@@ -263,10 +263,10 @@ namespace KF.KFWCFServiceLibrary {
         private string BrandField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool ExtraEquipmentField;
+        private System.Nullable<bool> ExtraEquipmentField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool HasYellowPlatesField;
+        private System.Nullable<bool> HasYellowPlatesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ModelField;
@@ -307,7 +307,7 @@ namespace KF.KFWCFServiceLibrary {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool ExtraEquipment {
+        public System.Nullable<bool> ExtraEquipment {
             get {
                 return this.ExtraEquipmentField;
             }
@@ -320,7 +320,7 @@ namespace KF.KFWCFServiceLibrary {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool HasYellowPlates {
+        public System.Nullable<bool> HasYellowPlates {
             get {
                 return this.HasYellowPlatesField;
             }

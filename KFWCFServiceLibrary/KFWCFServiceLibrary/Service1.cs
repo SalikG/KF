@@ -15,12 +15,12 @@ namespace KFWCFServiceLibrary
         {
             //Lav udregning med data fra insuranceCalc
             double totalYearlyPrice = 0;         
-            foreach (Insurance insurance in insuranceCalc.Insurances)
+            foreach (Insurance insurance in insuranceCalc.Insurances.Where(i => i.IsSelected))
             {
                 totalYearlyPrice += insurance.Price;
             }
 
-            totalYearlyPrice += insuranceCalc.Car.HasYellowPlates ? 1000 : 0;
+            totalYearlyPrice += insuranceCalc.Car.HasYellowPlates.GetValueOrDefault() ? 1000 : 0;
 
             insuranceCalc.CarNewPriceDiscount = insuranceCalc.Car.NewPrice < 200000 ? 20 :
                 insuranceCalc.Car.NewPrice < 400000 ? 10 :

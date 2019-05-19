@@ -1,4 +1,5 @@
-﻿@using ASP.Helpers
+﻿@using System.Web.UI.WebControls
+@using ASP.Helpers
 @using KF.KFWCFServiceLibrary
 @using Microsoft.Ajax.Utilities
 @model KF.KFWCFServiceLibrary.InsuranceCalc
@@ -11,23 +12,28 @@
      }
     <div id="leContainer">
         <div class="form-group">
-            <div >
-                @Html.EditorFor(model => model.Car.RegNr, new {htmlAttributes = new {@class = "form-control"}})
                 <input type="submit" name="action" value="Søg" class="search" id="searchBtn" onclick="searchBool()"/>
+            <div class="row">
+                <div class="col-3">
+                    @Html.EditorFor(model => model.Car.RegNr, new {htmlAttributes = new {@class = "form-control", placeHolder = "Reg nr"}})
+                </div>
+                <div class="col">
+                    <input type="submit" name="action" value="Søg" class="btn btn-primary"/>
+                </div>
             </div>
+        </div>
+            <div class="form-group">
             <div class="form-check-inline">
                 <label class="form-check-label">
                     @Html.RadioButtonFor(model => model.CarChange, "True")Bilskifte
-                    @*<input type="radio" name="radioCarInsuranceType" class="form-check-input">Bilskifte*@
                 </label>
             </div>
-            <div class="form-check-inline">
-                <label class="form-check-label">
-                    @Html.RadioButtonFor(model => model.CarChange, "False")Ekstra bil
-                    @*<input type="radio" name="radioCarInsuranceType" class="form-check-input">Ekstra bil*@
-                </label>
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        @Html.RadioButtonFor(model => model.CarChange, "False")Ekstra bil
+                    </label>
+                </div>
             </div>
-        </div>
         <div class="form-group">
             <label class="bold-lbl">Gule nummerplader:</label>
             <br />
@@ -48,15 +54,24 @@
         <table class="table">
             <tr>
                 <td>Mærke: </td>
-                <td>@(Model.Car?.Brand ?? "")</td>
+                <td>
+                    @Html.HiddenFor(model => model.Car.Brand)
+                    @(Model.Car?.Brand ?? "")
+                </td>
             </tr>
             <tr>
                 <td>Model: </td>
-                <td>@(Model.Car?.Model ?? "")</td>
+                <td>
+                    @Html.HiddenFor(model => model.Car.Model)
+                    @(Model.Car?.Model ?? "")
+                </td>
             </tr>
             <tr>
                 <td>Årgang:</td>
-                <td>@(Model.Car?.Year ?? 0)</td>
+                <td>
+                    @Html.HiddenFor(model => model.Car.Year)
+                    @(Model.Car?.Year ?? 0)
+                </td>
             </tr>
         </table>
         <h1 class="underlined-header">
@@ -120,11 +135,10 @@
                             </label>
                         </div>
                     </div>
-                    @*@CalcHelper.RadioYesNo("extraEquipment", "Har bilen ekstraudstyr for over 24.865 kr?")*@
                 </div>
                 <div class="col">
                     Vælg selvrisiko
-                    <div>
+                    <div style="max-width: 200px">
                         <input type="range" valueAsNumber="" class="form-control-range" name="range" id="rangeId" max="5" min="0" step="1" oninput="GetRangeNum()">
                     </div>
 
@@ -194,7 +208,15 @@
         </div>
     </div>
 }
-<script>
+    <script>
+    function GetRangeNum() {
+        var index = document.getElementById('rangeId');
+        var rangeNums = ["0", "2305", "4611", "7245", "9881", "12514"];
+        document.getElementById('rangeLblId').innerHTML = rangeNums[parseInt(index.value)];
+        document.getElementById('Excess').value = rangeNums[parseInt(index.value)];
+    }
+
+
 
     var searchClicked = false;
 
@@ -231,54 +253,54 @@
             document.getElementById(id.id + "CheckBox").checked = false;
 
         }
-        else {    
+        else {
             document.getElementById(id.id).style.backgroundColor = "greenyellow";
             document.getElementById(id.id + "CheckBox").checked = true;
         }
     }
 
-    function InitializeInsuranceButtons() {
+    function Init() {
+        //icon buttons
         if (document.getElementById("ResponsibilityAndKaskoCheckBox").checked == false) {
             document.getElementById("ResponsibilityAndKasko").style.backgroundColor = "white";
         }
-        else {    
+        else {
             document.getElementById("ResponsibilityAndKasko").style.backgroundColor = "greenyellow";
         }
 
         if (document.getElementById("RoadsideAssistanceCheckBox").checked == false) {
             document.getElementById("RoadsideAssistance").style.backgroundColor = "white";
         }
-        else {    
+        else {
             document.getElementById("RoadsideAssistance").style.backgroundColor = "greenyellow";
         }
 
         if (document.getElementById("DriversSeatInsuranceCheckBox").checked == false) {
             document.getElementById("DriversSeatInsurance").style.backgroundColor = "white";
         }
-        else {    
+        else {
             document.getElementById("DriversSeatInsurance").style.backgroundColor = "greenyellow";
         }
 
         if (document.getElementById("ExtendedCarInsuranceCheckBox").checked == false) {
             document.getElementById("ExtendedCarInsurance").style.backgroundColor = "white";
         }
-        else {    
+        else {
             document.getElementById("ExtendedCarInsurance").style.backgroundColor = "greenyellow";
         }
 
         if (document.getElementById("ParkingInjuryCheckBox").checked == false) {
             document.getElementById("ParkingInjury").style.backgroundColor = "white";
         }
-        else {    
+        else {
             document.getElementById("ParkingInjury").style.backgroundColor = "greenyellow";
         }
+
+        //range input        
+        var rangeNums = ["0", "2305", "4611", "7245", "9881", "12514"];
+        var index = document.getElementById('rangeId');
+        index.value = rangeNums.indexOf(document.getElementById('rangeLblId').innerHTML).toString();
     }
 
-    InitializeInsuranceButtons();
-    //InsuranceBtnClickEvent(document.getElementById("ResponsibilityAndKasko"));
-    //InsuranceBtnClickEvent(document.getElementById("RoadsideAssistance"));
-    //InsuranceBtnClickEvent(document.getElementById("DriversSeatInsurance"));
-    //InsuranceBtnClickEvent(document.getElementById("ExtendedCarInsurance"));
-    //InsuranceBtnClickEvent(document.getElementById("ParkingInjury"));
-
-</script>
+    Init()
+    </script>
