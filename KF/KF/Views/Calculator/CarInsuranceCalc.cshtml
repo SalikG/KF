@@ -12,13 +12,12 @@
      }
     <div id="leContainer">
         <div class="form-group">
-                <input type="submit" name="action" value="Søg" class="search" id="searchBtn" onclick="searchBool()"/>
             <div class="row">
                 <div class="col-3">
                     @Html.EditorFor(model => model.Car.RegNr, new {htmlAttributes = new {@class = "form-control", placeHolder = "Reg nr"}})
                 </div>
                 <div class="col">
-                    <input type="submit" name="action" value="Søg" class="btn btn-primary"/>
+                    <input type="submit" name="action" value="Søg" class="btn btn-primary" id="searchBtn" onclick="searchBool()"/>
                 </div>
             </div>
         </div>
@@ -208,7 +207,9 @@
         </div>
     </div>
 }
-    <script>
+<script>
+    var searchClicked = false;
+
     function GetRangeNum() {
         var index = document.getElementById('rangeId');
         var rangeNums = ["0", "2305", "4611", "7245", "9881", "12514"];
@@ -216,17 +217,11 @@
         document.getElementById('Excess').value = rangeNums[parseInt(index.value)];
     }
 
-
-
-    var searchClicked = false;
-
-    function searchBool()
-    {
+    function searchBool(){
         searchClicked = true;
     }
     
-    function validateMyForm(id)
-    {
+    function validateMyForm(id){
         if (searchClicked) {
             searchClicked = false;
         }
@@ -236,11 +231,15 @@
             var hasYellowPlatesFalse = document.getElementById("hasYellowPlatesFalse").checked;
             var extraEquipmentTrue = document.getElementById("extraEquipmentTrue").checked;
             var extraEquipmentFalse = document.getElementById("extraEquipmentFalse").checked;
-
-            if (!hasYellowPlatesTrue && !hasYellowPlatesFalse) {
+            if (document.getElementById("Car_Model").value === "") {
+                alert("Søg og find bil med reg nr.");
+                return false;
+            }
+            else if (!hasYellowPlatesTrue && !hasYellowPlatesFalse) {
                 alert("Vælg om bilen er på gule plader eller ej");
                 return false;
-            } else if (!extraEquipmentTrue && !extraEquipmentFalse) {
+            }
+            else if (!extraEquipmentTrue && !extraEquipmentFalse) {
                 alert("Vælg om der er ekstra udstyr for over 24.865 kr");
                 return false;
             }
@@ -248,7 +247,7 @@
     }
 
     function InsuranceBtnClickEvent(id) {
-        if (document.getElementById(id.id).style.backgroundColor.toString() == "greenyellow") {
+        if (document.getElementById(id.id).style.backgroundColor.toString() === "greenyellow") {
             document.getElementById(id.id).style.backgroundColor = "white";
             document.getElementById(id.id + "CheckBox").checked = false;
 
@@ -261,35 +260,35 @@
 
     function Init() {
         //icon buttons
-        if (document.getElementById("ResponsibilityAndKaskoCheckBox").checked == false) {
+        if (document.getElementById("ResponsibilityAndKaskoCheckBox").checked === false) {
             document.getElementById("ResponsibilityAndKasko").style.backgroundColor = "white";
         }
         else {
             document.getElementById("ResponsibilityAndKasko").style.backgroundColor = "greenyellow";
         }
 
-        if (document.getElementById("RoadsideAssistanceCheckBox").checked == false) {
+        if (document.getElementById("RoadsideAssistanceCheckBox").checked === false) {
             document.getElementById("RoadsideAssistance").style.backgroundColor = "white";
         }
         else {
             document.getElementById("RoadsideAssistance").style.backgroundColor = "greenyellow";
         }
 
-        if (document.getElementById("DriversSeatInsuranceCheckBox").checked == false) {
+        if (document.getElementById("DriversSeatInsuranceCheckBox").checked === false) {
             document.getElementById("DriversSeatInsurance").style.backgroundColor = "white";
         }
         else {
             document.getElementById("DriversSeatInsurance").style.backgroundColor = "greenyellow";
         }
 
-        if (document.getElementById("ExtendedCarInsuranceCheckBox").checked == false) {
+        if (document.getElementById("ExtendedCarInsuranceCheckBox").checked === false) {
             document.getElementById("ExtendedCarInsurance").style.backgroundColor = "white";
         }
         else {
             document.getElementById("ExtendedCarInsurance").style.backgroundColor = "greenyellow";
         }
 
-        if (document.getElementById("ParkingInjuryCheckBox").checked == false) {
+        if (document.getElementById("ParkingInjuryCheckBox").checked === false) {
             document.getElementById("ParkingInjury").style.backgroundColor = "white";
         }
         else {
@@ -302,5 +301,6 @@
         index.value = rangeNums.indexOf(document.getElementById('rangeLblId').innerHTML).toString();
     }
 
-    Init()
-    </script>
+    Init();
+
+</script>
