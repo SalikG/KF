@@ -1,0 +1,306 @@
+﻿@using System.Web.UI.WebControls
+@using ASP.Helpers
+@using KF.KFWCFServiceLibrary
+@using Microsoft.Ajax.Utilities
+@model KF.KFWCFServiceLibrary.InsuranceCalc
+@using (Html.BeginForm("CarInsuranceCalc", "Calculator", FormMethod.Post, new {onsubmit="return validateMyForm();"}))
+{
+    for (int i = 0; i < Model.Insurances.Length; i++)
+     {
+         @Html.HiddenFor(model => model.Insurances[i].Name);
+         @Html.HiddenFor(model => model.Insurances[i].Price)
+     }
+    <div id="leContainer">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-3">
+                    @Html.EditorFor(model => model.Car.RegNr, new {htmlAttributes = new {@class = "form-control", placeHolder = "Reg nr"}})
+                </div>
+                <div class="col">
+                    <input type="submit" name="action" value="Søg" class="btn btn-primary" id="searchBtn" onclick="searchBool()"/>
+                </div>
+            </div>
+        </div>
+            <div class="form-group">
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    @Html.RadioButtonFor(model => model.CarChange, "True")Bilskifte
+                </label>
+            </div>
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        @Html.RadioButtonFor(model => model.CarChange, "False")Ekstra bil
+                    </label>
+                </div>
+            </div>
+        <div class="form-group">
+            <label class="bold-lbl">Gule nummerplader:</label>
+            <br />
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    @Html.RadioButtonFor(model => model.Car.HasYellowPlates, "True", new {id="hasYellowPlatesTrue"})Ja
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    @Html.RadioButtonFor(model => model.Car.HasYellowPlates, "False", new {id="hasYellowPlatesFalse"})Nej      
+                </label>
+            </div>
+        </div>
+        <h1 class="underlined-header">
+            Bil info
+        </h1>
+        <table class="table">
+            <tr>
+                <td>Mærke: </td>
+                <td>
+                    @Html.HiddenFor(model => model.Car.Brand)
+                    @(Model.Car?.Brand ?? "")
+                </td>
+            </tr>
+            <tr>
+                <td>Model: </td>
+                <td>
+                    @Html.HiddenFor(model => model.Car.Model)
+                    @(Model.Car?.Model ?? "")
+                </td>
+            </tr>
+            <tr>
+                <td>Årgang:</td>
+                <td>
+                    @Html.HiddenFor(model => model.Car.Year)
+                    @(Model.Car?.Year ?? 0)
+                </td>
+            </tr>
+        </table>
+        <h1 class="underlined-header">
+            Dækninger
+        </h1>
+
+        <div class="row disabled">
+            @{
+                int responsibilityAndKaskoIndexOf = Array.IndexOf(Model.Insurances,
+                    Model.Insurances.FirstOrDefault(i => i.Name == "Ansvar og Kasko"));
+            }
+            @Html.CheckBoxFor(model => model.Insurances[responsibilityAndKaskoIndexOf].IsSelected, new { id = "ResponsibilityAndKaskoCheckBox", @class = "hide" })
+            @CalcHelper.InsuranceBtn("ResponsibilityAndKasko", "Ansvar og Kasko", "/Content/Icons/BilKasko_Blue.svg")
+        </div>
+        <h1 style="font-size: 20px; margin-bottom: 4px;">
+            Tilvalgsdækninger
+        </h1>
+        <div class="row">
+            @{
+                int roadsideAssistanceIndexOf = Array.IndexOf(Model.Insurances,
+                    Model.Insurances.FirstOrDefault(i => i.Name == "Vejhjælp"));
+            }
+            @Html.CheckBoxFor(model => model.Insurances[roadsideAssistanceIndexOf].IsSelected, new { id = "RoadsideAssistanceCheckBox", @class = "hide" })
+            @CalcHelper.InsuranceBtn("RoadsideAssistance", "Vejhjælp", "/Content/Icons/BilVejhjaelp_Blue.svg")
+            
+            @{
+                int driversSeatInsuranceIndexOf = Array.IndexOf(Model.Insurances,
+                    Model.Insurances.FirstOrDefault(i => i.Name == "Førepladsdækning"));
+            }
+            @Html.CheckBoxFor(model => model.Insurances[driversSeatInsuranceIndexOf].IsSelected, new { id = "DriversSeatInsuranceCheckBox", @class = "hide" })
+            @CalcHelper.InsuranceBtn("DriversSeatInsurance", "Førepladsdækning", "/Content/Icons/BilFoererpladsdaekning_Blue.svg")
+            
+            @{
+                int extendedCarInsuranceIndexOf = Array.IndexOf(Model.Insurances,
+                    Model.Insurances.FirstOrDefault(i => i.Name == "Udvidet bildækning"));
+            }
+            @Html.CheckBoxFor(model => model.Insurances[extendedCarInsuranceIndexOf].IsSelected, new { id = "ExtendedCarInsuranceCheckBox", @class = "hide" })
+            @CalcHelper.InsuranceBtn("ExtendedCarInsurance", "Udvidet bildækning", "/Content/Icons/BilUdvidet_Blue.svg")
+            
+            @{
+                int parkingInjuryIndexOf = Array.IndexOf(Model.Insurances,
+                    Model.Insurances.FirstOrDefault(i => i.Name == "Parkeringsskade"));
+            }
+            @Html.CheckBoxFor(model => model.Insurances[parkingInjuryIndexOf].IsSelected, new { id = "ParkingInjuryCheckBox", @class = "hide" })
+            @CalcHelper.InsuranceBtn("ParkingInjury", "Parkeringsskade", "/Content/Icons/Parkeringsskade_Blue.svg")
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="bold-lbl">Har bilen ekstraudstyr for over 24.865 kr?</label>
+                        <br />
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                @Html.RadioButtonFor(model => model.Car.ExtraEquipment, "True", new {id="extraEquipmentTrue"})Ja
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                @Html.RadioButtonFor(model => model.Car.ExtraEquipment, "False", new {id="extraEquipmentFalse"})Nej      
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    Vælg selvrisiko
+                    <div style="max-width: 200px">
+                        <input type="range" valueAsNumber="" class="form-control-range" name="range" id="rangeId" max="5" min="0" step="1" oninput="GetRangeNum()">
+                    </div>
+
+                    <div>
+                        @Html.HiddenFor(model => model.Excess)
+                        @Html.LabelFor(model => model.Excess, Model.Excess.ToString(),
+                            new {style = "font-size: medium; margin - left: 10px", id = "rangeLblId", @for = "rangeId"})
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" name="action" class="btn btn-success" value="Beregn" id="calcBtn"/>
+        </div>
+    </div>
+    <button type="button" class="btn btn-danger" onclick="openFixedBasketBox()" id="openBasketBtn"><i class="fa fa-bars"></i> Dine beregninger</button>
+    <div class="fixed-basket-box" id="fixedBasket">
+        <div class="row">
+            <div class="col">
+                <h3>Dine beregninger</h3>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-danger" onclick="closeFixedBasketBox()"><i class="fa fa-close"></i> Luk</button>
+            </div>
+        </div>
+        <div class="row" style="border-bottom: 2px solid;">
+            <div class="col-md-auto">
+                <p >Årlige pris før rabat:</p>
+            </div>
+            <div class="col">
+                <p class="fixed-basket-box-price">@Model.FullPriceWithoutDiscount kr.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-auto">
+                <p>Rabat:</p>
+            </div>
+            <div class="col">
+                <p class="fixed-basket-box-price">@Model.TotalDiscount %</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-auto">
+                <p>Din pris:</p>
+            </div>
+            <div class="col">
+                <p class="fixed-basket-box-price">@Model.FullPriceWithDiscount kr.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-secondary">Log in med nem id og køb</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Andre muligheder</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="submit" name="action" class="btn btn-info" value="Gem tilbud"/>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-info">Ring mig op</button>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    var searchClicked = false;
+
+    function GetRangeNum() {
+        var index = document.getElementById('rangeId');
+        var rangeNums = ["0", "2305", "4611", "7245", "9881", "12514"];
+        document.getElementById('rangeLblId').innerHTML = rangeNums[parseInt(index.value)];
+        document.getElementById('Excess').value = rangeNums[parseInt(index.value)];
+    }
+
+    function searchBool(){
+        searchClicked = true;
+    }
+    
+    function validateMyForm(id){
+        if (searchClicked) {
+            searchClicked = false;
+        }
+        else {
+
+            var hasYellowPlatesTrue = document.getElementById("hasYellowPlatesTrue").checked;
+            var hasYellowPlatesFalse = document.getElementById("hasYellowPlatesFalse").checked;
+            var extraEquipmentTrue = document.getElementById("extraEquipmentTrue").checked;
+            var extraEquipmentFalse = document.getElementById("extraEquipmentFalse").checked;
+            if (document.getElementById("Car_Model").value === "") {
+                alert("Søg og find bil med reg nr.");
+                return false;
+            }
+            else if (!hasYellowPlatesTrue && !hasYellowPlatesFalse) {
+                alert("Vælg om bilen er på gule plader eller ej");
+                return false;
+            }
+            else if (!extraEquipmentTrue && !extraEquipmentFalse) {
+                alert("Vælg om der er ekstra udstyr for over 24.865 kr");
+                return false;
+            }
+        }
+    }
+
+    function InsuranceBtnClickEvent(id) {
+        if (document.getElementById(id.id).style.backgroundColor.toString() === "greenyellow") {
+            document.getElementById(id.id).style.backgroundColor = "white";
+            document.getElementById(id.id + "CheckBox").checked = false;
+
+        }
+        else {
+            document.getElementById(id.id).style.backgroundColor = "greenyellow";
+            document.getElementById(id.id + "CheckBox").checked = true;
+        }
+    }
+
+    function Init() {
+        //icon buttons
+        if (document.getElementById("ResponsibilityAndKaskoCheckBox").checked === false) {
+            document.getElementById("ResponsibilityAndKasko").style.backgroundColor = "white";
+        }
+        else {
+            document.getElementById("ResponsibilityAndKasko").style.backgroundColor = "greenyellow";
+        }
+
+        if (document.getElementById("RoadsideAssistanceCheckBox").checked === false) {
+            document.getElementById("RoadsideAssistance").style.backgroundColor = "white";
+        }
+        else {
+            document.getElementById("RoadsideAssistance").style.backgroundColor = "greenyellow";
+        }
+
+        if (document.getElementById("DriversSeatInsuranceCheckBox").checked === false) {
+            document.getElementById("DriversSeatInsurance").style.backgroundColor = "white";
+        }
+        else {
+            document.getElementById("DriversSeatInsurance").style.backgroundColor = "greenyellow";
+        }
+
+        if (document.getElementById("ExtendedCarInsuranceCheckBox").checked === false) {
+            document.getElementById("ExtendedCarInsurance").style.backgroundColor = "white";
+        }
+        else {
+            document.getElementById("ExtendedCarInsurance").style.backgroundColor = "greenyellow";
+        }
+
+        if (document.getElementById("ParkingInjuryCheckBox").checked === false) {
+            document.getElementById("ParkingInjury").style.backgroundColor = "white";
+        }
+        else {
+            document.getElementById("ParkingInjury").style.backgroundColor = "greenyellow";
+        }
+
+        //range input        
+        var rangeNums = ["0", "2305", "4611", "7245", "9881", "12514"];
+        var index = document.getElementById('rangeId');
+        index.value = rangeNums.indexOf(document.getElementById('rangeLblId').innerHTML).toString();
+    }
+
+    Init();
+
+</script>
