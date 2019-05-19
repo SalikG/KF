@@ -46,6 +46,18 @@
         document.getElementById("fixedBasket").style.width = "0";
         document.getElementById("leContainer").style.paddingRight = "0rem";
     }
+
+    // Det her kommer ikke til at virke da man skal kunne trykke på search button uden at have markeret gule plader, ekstra udstyr etc.
+    // Det er fordi denne funktion kører hver gang der sker en submit på siden fordi hele siden ligger i en form. Så endten skal det deles
+    // op eller vi skal finde en anden metode
+    //function validateForm() {
+    //    var x = document.forms["CarInsuranceCalc"]["radioCarInsuranceType"].value;
+    //    if (x) {
+    //        alert("Bornholmerfar har snaps i blodet");
+
+    //        return false;
+    //    }
+    //}
 </script>
 </body>
 </html>
