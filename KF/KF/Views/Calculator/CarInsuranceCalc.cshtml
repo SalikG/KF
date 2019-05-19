@@ -2,7 +2,7 @@
 @using KF.KFWCFServiceLibrary
 @using Microsoft.Ajax.Utilities
 @model KF.KFWCFServiceLibrary.InsuranceCalc
-@using (Html.BeginForm("CarInsuranceCalc", "Calculator", FormMethod.Post, new { onsubmit="return validateForm()"}))
+@using (Html.BeginForm("CarInsuranceCalc", "Calculator", FormMethod.Post, new {onsubmit="return validateMyForm();"}))
 {
     for (int i = 0; i < Model.Insurances.Length; i++)
      {
@@ -13,7 +13,7 @@
         <div class="form-group">
             <div >
                 @Html.EditorFor(model => model.Car.RegNr, new {htmlAttributes = new {@class = "form-control"}})
-                <input type="submit" name="action" value="Søg" class="search"/>
+                <input type="submit" name="action" value="Søg" class="search" id="searchBtn" onclick="searchBool()"/>
             </div>
             <div class="form-check-inline">
                 <label class="form-check-label">
@@ -24,7 +24,6 @@
             <div class="form-check-inline">
                 <label class="form-check-label">
                     @Html.RadioButtonFor(model => model.CarChange, "False")Ekstra bil
-
                     @*<input type="radio" name="radioCarInsuranceType" class="form-check-input">Ekstra bil*@
                 </label>
             </div>
@@ -34,12 +33,12 @@
             <br />
             <div class="form-check-inline">
                 <label class="form-check-label">
-                    @Html.RadioButtonFor(model => model.Car.HasYellowPlates, "True")Ja
+                    @Html.RadioButtonFor(model => model.Car.HasYellowPlates, "True", new {id="hasYellowPlatesTrue"})Ja
                 </label>
             </div>
             <div class="form-check-inline">
                 <label class="form-check-label">
-                    @Html.RadioButtonFor(model => model.Car.HasYellowPlates, "False")Nej      
+                    @Html.RadioButtonFor(model => model.Car.HasYellowPlates, "False", new {id="hasYellowPlatesFalse"})Nej      
                 </label>
             </div>
         </div>
@@ -112,12 +111,12 @@
                         <br />
                         <div class="form-check-inline">
                             <label class="form-check-label">
-                                @Html.RadioButtonFor(model => model.Car.ExtraEquipment, "True")Ja
+                                @Html.RadioButtonFor(model => model.Car.ExtraEquipment, "True", new {id="extraEquipmentTrue"})Ja
                             </label>
                         </div>
                         <div class="form-check-inline">
                             <label class="form-check-label">
-                                @Html.RadioButtonFor(model => model.Car.ExtraEquipment, "False")Nej      
+                                @Html.RadioButtonFor(model => model.Car.ExtraEquipment, "False", new {id="extraEquipmentFalse"})Nej      
                             </label>
                         </div>
                     </div>
@@ -196,6 +195,36 @@
     </div>
 }
 <script>
+
+    var searchClicked = false;
+
+    function searchBool()
+    {
+        searchClicked = true;
+    }
+    
+    function validateMyForm(id)
+    {
+        if (searchClicked) {
+            searchClicked = false;
+        }
+        else {
+
+            var hasYellowPlatesTrue = document.getElementById("hasYellowPlatesTrue").checked;
+            var hasYellowPlatesFalse = document.getElementById("hasYellowPlatesFalse").checked;
+            var extraEquipmentTrue = document.getElementById("extraEquipmentTrue").checked;
+            var extraEquipmentFalse = document.getElementById("extraEquipmentFalse").checked;
+
+            if (!hasYellowPlatesTrue && !hasYellowPlatesFalse) {
+                alert("Vælg om bilen er på gule plader eller ej");
+                return false;
+            } else if (!extraEquipmentTrue && !extraEquipmentFalse) {
+                alert("Vælg om der er ekstra udstyr for over 24.865 kr");
+                return false;
+            }
+        }
+    }
+
     function InsuranceBtnClickEvent(id) {
         if (document.getElementById(id.id).style.backgroundColor.toString() == "greenyellow") {
             document.getElementById(id.id).style.backgroundColor = "white";

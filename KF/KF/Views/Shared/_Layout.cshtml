@@ -36,6 +36,7 @@
 @RenderSection("scripts", required: false)
 <script type="text/javascript">
 
+    // Giver det mening at have disse scripts i layout når de kun bliver brugt på insurance calc?
     function GetRangeNum() {
         var index = document.getElementById('rangeId');
         var rangeNums = ["0", "2305", "4611", "7245", "9881", "12514"];
@@ -53,14 +54,17 @@
         document.getElementById("leContainer").style.paddingRight = "0rem";
     }
 
-    function validateForm() {
-        //var x = document.forms["CarInsuranceCalc"]["radioCarInsuranceType"].value;
-        //System.Diagnostics.Debug.WriteLine(x);
-        //if (x) {
-            alert("Bornholmerfar har snaps i blodet");
-          return false;
-        //}
-    } 
+    // Det her kommer ikke til at virke da man skal kunne trykke på search button uden at have markeret gule plader, ekstra udstyr etc.
+    // Det er fordi denne funktion kører hver gang der sker en submit på siden fordi hele siden ligger i en form. Så endten skal det deles
+    // op eller vi skal finde en anden metode
+    //function validateForm() {
+    //    var x = document.forms["CarInsuranceCalc"]["radioCarInsuranceType"].value;
+    //    if (x) {
+    //        alert("Bornholmerfar har snaps i blodet");
+
+    //        return false;
+    //    }
+    //}
 </script>
 </body>
 </html>

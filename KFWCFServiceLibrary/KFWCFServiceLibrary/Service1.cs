@@ -49,7 +49,7 @@ namespace KFWCFServiceLibrary
 
         public Car GetCar(string regNum)
         {
-            if (regNum.StartsWith("A"))
+            if (regNum.StartsWith("A") && regNum != null)
             {
                 return new Car()
                 {
