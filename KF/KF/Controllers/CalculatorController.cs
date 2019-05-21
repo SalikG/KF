@@ -53,5 +53,10 @@ namespace KF.Controllers
             var insuranceOffer = _repository.CalculateInsurance(insuranceCalc);
             return View("CarInsuranceCalc", insuranceOffer);
         }
+
+        public ActionResult InsuranceOffers()
+        {
+            return View();
+        }
     }
 }

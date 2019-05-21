@@ -16,7 +16,8 @@
     <div class="container">
         @Html.ActionLink("Mit KF", "CarInsuranceCalc", "Calculator", new {area = ""}, new {@class = "navbar-brand"})
         <ul class="navbar-nav">
-            <li class="nav-item">@Html.ActionLink("Calculator", "CarInsuranceCalc", "Calculator", new {}, new {@class = "nav-link"})</li>
+            <li class="nav-item">@Html.ActionLink("Mine tilbud", "InsuranceOffers", "Calculator", new {}, new {@class = "nav-link"})</li>
+            <li class="nav-item">@Html.ActionLink("Beregner", "CarInsuranceCalc", "Calculator", new {}, new {@class = "nav-link"})</li>
         </ul>
     </div>
 </nav>
