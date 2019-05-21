@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title Købstædernes Forsikring</title>
     @Scripts.Render("~/bundles/modernizr")
     @*@Styles.Render("~/Content/css")*@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -14,11 +14,8 @@
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container">
-        @Html.ActionLink("Mit KF", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+        @Html.ActionLink("Mit KF", "CarInsuranceCalc", "Calculator", new {area = ""}, new {@class = "navbar-brand"})
         <ul class="navbar-nav">
-            <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new {}, new {@class = "nav-link"})</li>
-            <li class="nav-item">@Html.ActionLink("About", "About", "Home", new {}, new {@class = "nav-link"})</li>
-            <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new {}, new {@class = "nav-link"})</li>
             <li class="nav-item">@Html.ActionLink("Calculator", "CarInsuranceCalc", "Calculator", new {}, new {@class = "nav-link"})</li>
         </ul>
     </div>
@@ -27,7 +24,7 @@
     @RenderBody()
     <hr />
     <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <p>&copy; @DateTime.Now.Year - Købstædernes Forsikring</p>
     </footer>
 </div>
 
