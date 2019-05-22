@@ -70,17 +70,6 @@
       <Association Name="Offer_InsuranceOffer" Member="Offer" ThisKey="Fk_OfferId" OtherKey="Id" Type="Offer" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Model" Member="Models">
-    <Type Name="Model">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Fk_BrandId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Fk_TypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Model" Member="Model1" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
-      <Association Name="Model_Car" Member="Cars" ThisKey="Id" OtherKey="Fk_ModelId" Type="Car" />
-      <Association Name="Brand_Model" Member="Brand" ThisKey="Fk_BrandId" OtherKey="Id" Type="Brand" IsForeignKey="true" />
-      <Association Name="Type_Model" Member="Type" ThisKey="Fk_TypeId" OtherKey="Id" Type="Type" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Offer" Member="Offers">
     <Type Name="Offer">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -103,6 +92,17 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
       <Association Name="Type_Model" Member="Models" ThisKey="Id" OtherKey="Fk_TypeId" Type="Model" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Model" Member="Models">
+    <Type Name="Model">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Fk_BrandId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fk_TypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Association Name="Model_Car" Member="Cars" ThisKey="Id" OtherKey="Fk_ModelId" Type="Car" />
+      <Association Name="Brand_Model" Member="Brand" ThisKey="Fk_BrandId" OtherKey="Id" Type="Brand" IsForeignKey="true" />
+      <Association Name="Type_Model" Member="Type" ThisKey="Fk_TypeId" OtherKey="Id" Type="Type" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

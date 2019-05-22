@@ -48,15 +48,15 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
     partial void InsertInsurance(Insurance instance);
     partial void UpdateInsurance(Insurance instance);
     partial void DeleteInsurance(Insurance instance);
-    partial void InsertModel(Model instance);
-    partial void UpdateModel(Model instance);
-    partial void DeleteModel(Model instance);
     partial void InsertOffer(Offer instance);
     partial void UpdateOffer(Offer instance);
     partial void DeleteOffer(Offer instance);
     partial void InsertType(Type instance);
     partial void UpdateType(Type instance);
     partial void DeleteType(Type instance);
+    partial void InsertModel(Model instance);
+    partial void UpdateModel(Model instance);
+    partial void DeleteModel(Model instance);
     #endregion
 		
 		public KFInsuranceDataContext() : 
@@ -145,14 +145,6 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 			}
 		}
 		
-		public System.Data.Linq.Table<Model> Models
-		{
-			get
-			{
-				return this.GetTable<Model>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Offer> Offers
 		{
 			get
@@ -166,6 +158,14 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 			get
 			{
 				return this.GetTable<Type>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Model> Models
+		{
+			get
+			{
+				return this.GetTable<Model>();
 			}
 		}
 	}
@@ -1396,250 +1396,6 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Model")]
-	public partial class Model : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _Fk_BrandId;
-		
-		private int _Fk_TypeId;
-		
-		private string _Model1;
-		
-		private EntitySet<Car> _Cars;
-		
-		private EntityRef<Brand> _Brand;
-		
-		private EntityRef<Type> _Type;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnFk_BrandIdChanging(int value);
-    partial void OnFk_BrandIdChanged();
-    partial void OnFk_TypeIdChanging(int value);
-    partial void OnFk_TypeIdChanged();
-    partial void OnModel1Changing(string value);
-    partial void OnModel1Changed();
-    #endregion
-		
-		public Model()
-		{
-			this._Cars = new EntitySet<Car>(new Action<Car>(this.attach_Cars), new Action<Car>(this.detach_Cars));
-			this._Brand = default(EntityRef<Brand>);
-			this._Type = default(EntityRef<Type>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fk_BrandId", DbType="Int NOT NULL")]
-		public int Fk_BrandId
-		{
-			get
-			{
-				return this._Fk_BrandId;
-			}
-			set
-			{
-				if ((this._Fk_BrandId != value))
-				{
-					if (this._Brand.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFk_BrandIdChanging(value);
-					this.SendPropertyChanging();
-					this._Fk_BrandId = value;
-					this.SendPropertyChanged("Fk_BrandId");
-					this.OnFk_BrandIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fk_TypeId", DbType="Int NOT NULL")]
-		public int Fk_TypeId
-		{
-			get
-			{
-				return this._Fk_TypeId;
-			}
-			set
-			{
-				if ((this._Fk_TypeId != value))
-				{
-					if (this._Type.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFk_TypeIdChanging(value);
-					this.SendPropertyChanging();
-					this._Fk_TypeId = value;
-					this.SendPropertyChanged("Fk_TypeId");
-					this.OnFk_TypeIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Model", Storage="_Model1", DbType="NChar(25) NOT NULL", CanBeNull=false)]
-		public string Model1
-		{
-			get
-			{
-				return this._Model1;
-			}
-			set
-			{
-				if ((this._Model1 != value))
-				{
-					this.OnModel1Changing(value);
-					this.SendPropertyChanging();
-					this._Model1 = value;
-					this.SendPropertyChanged("Model1");
-					this.OnModel1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Model_Car", Storage="_Cars", ThisKey="Id", OtherKey="Fk_ModelId")]
-		public EntitySet<Car> Cars
-		{
-			get
-			{
-				return this._Cars;
-			}
-			set
-			{
-				this._Cars.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Brand_Model", Storage="_Brand", ThisKey="Fk_BrandId", OtherKey="Id", IsForeignKey=true)]
-		public Brand Brand
-		{
-			get
-			{
-				return this._Brand.Entity;
-			}
-			set
-			{
-				Brand previousValue = this._Brand.Entity;
-				if (((previousValue != value) 
-							|| (this._Brand.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Brand.Entity = null;
-						previousValue.Models.Remove(this);
-					}
-					this._Brand.Entity = value;
-					if ((value != null))
-					{
-						value.Models.Add(this);
-						this._Fk_BrandId = value.Id;
-					}
-					else
-					{
-						this._Fk_BrandId = default(int);
-					}
-					this.SendPropertyChanged("Brand");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Type_Model", Storage="_Type", ThisKey="Fk_TypeId", OtherKey="Id", IsForeignKey=true)]
-		public Type Type
-		{
-			get
-			{
-				return this._Type.Entity;
-			}
-			set
-			{
-				Type previousValue = this._Type.Entity;
-				if (((previousValue != value) 
-							|| (this._Type.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Type.Entity = null;
-						previousValue.Models.Remove(this);
-					}
-					this._Type.Entity = value;
-					if ((value != null))
-					{
-						value.Models.Add(this);
-						this._Fk_TypeId = value.Id;
-					}
-					else
-					{
-						this._Fk_TypeId = default(int);
-					}
-					this.SendPropertyChanged("Type");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Cars(Car entity)
-		{
-			this.SendPropertyChanging();
-			entity.Model = this;
-		}
-		
-		private void detach_Cars(Car entity)
-		{
-			this.SendPropertyChanging();
-			entity.Model = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Offer")]
 	public partial class Offer : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2111,6 +1867,250 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 		{
 			this.SendPropertyChanging();
 			entity.Type = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Model")]
+	public partial class Model : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _Fk_BrandId;
+		
+		private int _Fk_TypeId;
+		
+		private string _Name;
+		
+		private EntitySet<Car> _Cars;
+		
+		private EntityRef<Brand> _Brand;
+		
+		private EntityRef<Type> _Type;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnFk_BrandIdChanging(int value);
+    partial void OnFk_BrandIdChanged();
+    partial void OnFk_TypeIdChanging(int value);
+    partial void OnFk_TypeIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public Model()
+		{
+			this._Cars = new EntitySet<Car>(new Action<Car>(this.attach_Cars), new Action<Car>(this.detach_Cars));
+			this._Brand = default(EntityRef<Brand>);
+			this._Type = default(EntityRef<Type>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fk_BrandId", DbType="Int NOT NULL")]
+		public int Fk_BrandId
+		{
+			get
+			{
+				return this._Fk_BrandId;
+			}
+			set
+			{
+				if ((this._Fk_BrandId != value))
+				{
+					if (this._Brand.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFk_BrandIdChanging(value);
+					this.SendPropertyChanging();
+					this._Fk_BrandId = value;
+					this.SendPropertyChanged("Fk_BrandId");
+					this.OnFk_BrandIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fk_TypeId", DbType="Int NOT NULL")]
+		public int Fk_TypeId
+		{
+			get
+			{
+				return this._Fk_TypeId;
+			}
+			set
+			{
+				if ((this._Fk_TypeId != value))
+				{
+					if (this._Type.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFk_TypeIdChanging(value);
+					this.SendPropertyChanging();
+					this._Fk_TypeId = value;
+					this.SendPropertyChanged("Fk_TypeId");
+					this.OnFk_TypeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NChar(25) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Model_Car", Storage="_Cars", ThisKey="Id", OtherKey="Fk_ModelId")]
+		public EntitySet<Car> Cars
+		{
+			get
+			{
+				return this._Cars;
+			}
+			set
+			{
+				this._Cars.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Brand_Model", Storage="_Brand", ThisKey="Fk_BrandId", OtherKey="Id", IsForeignKey=true)]
+		public Brand Brand
+		{
+			get
+			{
+				return this._Brand.Entity;
+			}
+			set
+			{
+				Brand previousValue = this._Brand.Entity;
+				if (((previousValue != value) 
+							|| (this._Brand.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Brand.Entity = null;
+						previousValue.Models.Remove(this);
+					}
+					this._Brand.Entity = value;
+					if ((value != null))
+					{
+						value.Models.Add(this);
+						this._Fk_BrandId = value.Id;
+					}
+					else
+					{
+						this._Fk_BrandId = default(int);
+					}
+					this.SendPropertyChanged("Brand");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Type_Model", Storage="_Type", ThisKey="Fk_TypeId", OtherKey="Id", IsForeignKey=true)]
+		public Type Type
+		{
+			get
+			{
+				return this._Type.Entity;
+			}
+			set
+			{
+				Type previousValue = this._Type.Entity;
+				if (((previousValue != value) 
+							|| (this._Type.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Type.Entity = null;
+						previousValue.Models.Remove(this);
+					}
+					this._Type.Entity = value;
+					if ((value != null))
+					{
+						value.Models.Add(this);
+						this._Fk_TypeId = value.Id;
+					}
+					else
+					{
+						this._Fk_TypeId = default(int);
+					}
+					this.SendPropertyChanged("Type");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Cars(Car entity)
+		{
+			this.SendPropertyChanging();
+			entity.Model = this;
+		}
+		
+		private void detach_Cars(Car entity)
+		{
+			this.SendPropertyChanging();
+			entity.Model = null;
 		}
 	}
 }

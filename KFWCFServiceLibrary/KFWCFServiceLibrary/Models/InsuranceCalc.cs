@@ -24,9 +24,9 @@ namespace KFWCFServiceLibrary.Models
         [DataMember]
         public double CarNewPriceDiscount { get; set; }
         [DataMember]
-        public int SeniorityDiscount { get; set; }
+        public double SeniorityDiscount { get; set; }
         [DataMember]
-        public int YearsWithoutCrashDiscount { get; set; }
+        public double YearsWithoutCrashDiscount { get; set; }
         [DataMember]
         public double ExcessDiscount { get; set; }
         [DataMember]

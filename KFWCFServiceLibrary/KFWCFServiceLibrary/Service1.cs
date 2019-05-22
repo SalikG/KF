@@ -56,6 +56,7 @@ namespace KFWCFServiceLibrary
             {
                 return new Car
                 {
+                    Id = 1,
                     RegNr = regNum,
                     Brand = "Mercedes",
                     Model = "A180",
@@ -67,6 +68,7 @@ namespace KFWCFServiceLibrary
 
             return new Car
             {
+                Id = 2,
                 RegNr = regNum,
                 Brand = "Volvo",
                 Model = "V70",
@@ -83,30 +85,35 @@ namespace KFWCFServiceLibrary
             {
                 new Insurance
                 {
+                    Id = 2,
                     Name = "Ansvar og Kasko",
                     Price = 6500,
                     IsSelected = true
                 },
                 new Insurance
                 {
+                    Id = 3,
                     Name = "Vejhjælp",
                     Price = 600,
                     IsSelected = false
                 },
                 new Insurance
                 {
+                    Id = 4,
                     Name = "Førepladsdækning",
                     Price = 400,
                     IsSelected = false
                 },
                 new Insurance
                 {
+                    Id = 5,
                     Name = "Udvidet bildækning",
                     Price = 1000,
                     IsSelected = true
                 },
                 new Insurance
                 {
+                    Id = 6,
                     Name = "Parkeringsskade",
                     Price = 800,
                     IsSelected = false
@@ -150,20 +157,23 @@ namespace KFWCFServiceLibrary
             var offers = (from o in kfInsuranceData.Offers where o.Fk_CustomerId == customerId select o).ToList();
             foreach (var o in offers)
             {
-                //var offe = (from t in kfInsuranceData.InsuranceOffers where t.Fk_InsuranceId == 2 select t).ToList();
-                //offe.FirstOrDefault().
-                var insuranceList = (from i in kfInsuranceData.Insurances join insuranceOffer in kfInsuranceData.InsuranceOffers on i.Id equals insuranceOffer.Fk_InsuranceId  select i).ToList();
-                
-                //var insList = new List<Insurance>();
-                //foreach (var ins in insuranceList)
-                //{
-                    
-                //}
-                result.Add(new InsuranceCalc()
+                var insuranceList = (from i in kfInsuranceData.Insurances join insuranceOffer in kfInsuranceData.InsuranceOffers on i.Id equals insuranceOffer.Fk_InsuranceId where insuranceOffer.Fk_OfferId == o.Id select i).ToList();
+
+                var insList = new List<Insurance>();
+                foreach (var ins in insuranceList)
+                {
+                    insList.Add(new Insurance()
+                    {
+                        Name = ins.Name,
+                        Price = ins.Price,
+                        IsSelected = true
+                    });
+                }
+                result.Add(CalculateInsurance(new InsuranceCalc()
                 {
                     Car = new Car()
                     {
-                        Model = o.Car.Model.Model1,
+                        Model = o.Car.Model.Name,
                         ExtraEquipment = o.Car.ExtraEquipment,
                         Brand = o.Car.Model.Brand.Name,
                         HasYellowPlates = o.Car.HasYellowPlates,
@@ -172,10 +182,15 @@ namespace KFWCFServiceLibrary
                         Type = o.Car.Model.Type.Name,
                         Year = o.Car.Year
                     },
-                    Insurances = new List<Insurance>()
-                    {
-                    }
-                });
+                    Insurances = insList,                 
+                    CarNewPriceDiscount = o.CarNewPriceDiscount,
+                    SeniorityDiscount = o.SeniorityDiscount,
+                    YearsWithoutCrashDiscount = o.YearsWithoutCrashDiscount,
+                    ExcessDiscount = o.ExcessDiscount,
+                    Excess = o.Excess,
+                    BeginningDate = o.BeginningDate,
+                    CarChange = o.CarChange,
+                }));
             }
 
             return result;
@@ -183,7 +198,34 @@ namespace KFWCFServiceLibrary
 
         public bool SaveOffer(InsuranceCalc insuranceCalc)
         {
-            throw new NotImplementedException();
+            var offer = new Offer()
+            {
+                Fk_CustomerId = insuranceCalc.Customer.CustomerId,
+                Fk_CarId = insuranceCalc.Car.Id,
+                CarNewPriceDiscount = insuranceCalc.CarNewPriceDiscount,
+                SeniorityDiscount = insuranceCalc.SeniorityDiscount,
+                YearsWithoutCrashDiscount = insuranceCalc.YearsWithoutCrashDiscount,
+                ExcessDiscount = insuranceCalc.ExcessDiscount,
+                Excess = insuranceCalc.Excess,
+                BeginningDate = DateTime.Now,
+                CarChange = insuranceCalc.CarChange       
+            };
+
+            kfInsuranceData.Offers.InsertOnSubmit(offer);
+            kfInsuranceData.Offers.Context.SubmitChanges();
+            var insOffers = new List<InsuranceOffer>();
+            foreach (var ins in insuranceCalc.Insurances.Where(i => i.IsSelected))
+            {
+                insOffers.Add(new InsuranceOffer()
+                {
+                    Fk_InsuranceId = ins.Id,
+                    Fk_OfferId = (from o in kfInsuranceData.Offers where o.BeginningDate == offer.BeginningDate select o.Id).FirstOrDefault()
+                });
+            }
+            kfInsuranceData.InsuranceOffers.InsertAllOnSubmit(insOffers);
+            kfInsuranceData.InsuranceOffers.Context.SubmitChanges();
+
+            return true;
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)

@@ -3,47 +3,57 @@
 @using KF.KFWCFServiceLibrary
 @using Microsoft.Ajax.Utilities
 @model KF.KFWCFServiceLibrary.InsuranceCalc
-@using (Html.BeginForm("CarInsuranceCalc", "Calculator", FormMethod.Post, new {onsubmit="return validateMyForm();"}))
+@using (Html.BeginForm("CarInsuranceCalc", "Calculator", FormMethod.Post, new { onsubmit = "return validateMyForm();" }))
 {
     for (int i = 0; i < Model.Insurances.Length; i++)
-     {
-         @Html.HiddenFor(model => model.Insurances[i].Name);
-         @Html.HiddenFor(model => model.Insurances[i].Price)
-     }
+    {
+        @Html.HiddenFor(model => model.Insurances[i].Id)
+        @Html.HiddenFor(model => model.Insurances[i].Name);
+        @Html.HiddenFor(model => model.Insurances[i].Price)
+    }
+    @Html.HiddenFor(model => model.Car.Id)
+    @Html.HiddenFor(model => model.CarNewPriceDiscount)
+    @Html.HiddenFor(model => model.ExcessDiscount)
+    @Html.HiddenFor(model => model.FullPriceWithDiscount)
+    @Html.HiddenFor(model => model.FullPriceWithoutDiscount)
+    @Html.HiddenFor(model => model.SeniorityDiscount)
+    @Html.HiddenFor(model => model.TotalDiscount)
+    @Html.HiddenFor(model => model.YearsWithoutCrashDiscount)
+
     <div id="leContainer">
         <div class="form-group">
             <div class="row">
                 <div class="col-3">
-                    @Html.EditorFor(model => model.Car.RegNr, new {htmlAttributes = new {@class = "form-control", placeHolder = "Reg nr"}})
+                    @Html.EditorFor(model => model.Car.RegNr, new { htmlAttributes = new { @class = "form-control", placeHolder = "Reg nr" } })
                 </div>
                 <div class="col">
-                    <input type="submit" name="action" value="Søg" class="btn btn-primary" id="searchBtn" onclick="searchBool()"/>
+                    <input type="submit" name="action" value="Søg" class="btn btn-primary" id="searchBtn" onclick="searchBool()" />
                 </div>
             </div>
         </div>
-            <div class="form-group">
+        <div class="form-group">
             <div class="form-check-inline">
                 <label class="form-check-label">
                     @Html.RadioButtonFor(model => model.CarChange, "True")Bilskifte
                 </label>
             </div>
-                <div class="form-check-inline">
-                    <label class="form-check-label">
-                        @Html.RadioButtonFor(model => model.CarChange, "False")Ekstra bil
-                    </label>
-                </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    @Html.RadioButtonFor(model => model.CarChange, "False")Ekstra bil
+                </label>
             </div>
+        </div>
         <div class="form-group">
             <label class="bold-lbl">Gule nummerplader:</label>
             <br />
             <div class="form-check-inline">
                 <label class="form-check-label">
-                    @Html.RadioButtonFor(model => model.Car.HasYellowPlates, "True", new {id="hasYellowPlatesTrue"})Ja
+                    @Html.RadioButtonFor(model => model.Car.HasYellowPlates, "True", new { id = "hasYellowPlatesTrue" })Ja
                 </label>
             </div>
             <div class="form-check-inline">
                 <label class="form-check-label">
-                    @Html.RadioButtonFor(model => model.Car.HasYellowPlates, "False", new {id="hasYellowPlatesFalse"})Nej      
+                    @Html.RadioButtonFor(model => model.Car.HasYellowPlates, "False", new { id = "hasYellowPlatesFalse" })Nej
                 </label>
             </div>
         </div>
@@ -95,21 +105,21 @@
             }
             @Html.CheckBoxFor(model => model.Insurances[roadsideAssistanceIndexOf].IsSelected, new { id = "RoadsideAssistanceCheckBox", @class = "hide" })
             @CalcHelper.InsuranceBtn("RoadsideAssistance", "Vejhjælp", "/Content/Icons/BilVejhjaelp_Blue.svg")
-            
+
             @{
                 int driversSeatInsuranceIndexOf = Array.IndexOf(Model.Insurances,
                     Model.Insurances.FirstOrDefault(i => i.Name == "Førepladsdækning"));
             }
             @Html.CheckBoxFor(model => model.Insurances[driversSeatInsuranceIndexOf].IsSelected, new { id = "DriversSeatInsuranceCheckBox", @class = "hide" })
             @CalcHelper.InsuranceBtn("DriversSeatInsurance", "Førepladsdækning", "/Content/Icons/BilFoererpladsdaekning_Blue.svg")
-            
+
             @{
                 int extendedCarInsuranceIndexOf = Array.IndexOf(Model.Insurances,
                     Model.Insurances.FirstOrDefault(i => i.Name == "Udvidet bildækning"));
             }
             @Html.CheckBoxFor(model => model.Insurances[extendedCarInsuranceIndexOf].IsSelected, new { id = "ExtendedCarInsuranceCheckBox", @class = "hide" })
             @CalcHelper.InsuranceBtn("ExtendedCarInsurance", "Udvidet bildækning", "/Content/Icons/BilUdvidet_Blue.svg")
-            
+
             @{
                 int parkingInjuryIndexOf = Array.IndexOf(Model.Insurances,
                     Model.Insurances.FirstOrDefault(i => i.Name == "Parkeringsskade"));
@@ -125,12 +135,12 @@
                         <br />
                         <div class="form-check-inline">
                             <label class="form-check-label">
-                                @Html.RadioButtonFor(model => model.Car.ExtraEquipment, "True", new {id="extraEquipmentTrue"})Ja
+                                @Html.RadioButtonFor(model => model.Car.ExtraEquipment, "True", new { id = "extraEquipmentTrue" })Ja
                             </label>
                         </div>
                         <div class="form-check-inline">
                             <label class="form-check-label">
-                                @Html.RadioButtonFor(model => model.Car.ExtraEquipment, "False", new {id="extraEquipmentFalse"})Nej      
+                                @Html.RadioButtonFor(model => model.Car.ExtraEquipment, "False", new { id = "extraEquipmentFalse" })Nej
                             </label>
                         </div>
                     </div>
@@ -150,7 +160,7 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="submit" name="action" class="btn btn-success" value="Beregn" id="calcBtn"/>
+            <input type="submit" name="action" class="btn btn-success" value="Beregn" id="calcBtn" />
         </div>
     </div>
     <button type="button" class="btn btn-danger" onclick="openFixedBasketBox()" id="openBasketBtn"><i class="fa fa-bars"></i> Dine beregninger</button>
@@ -165,7 +175,7 @@
         </div>
         <div class="row" style="border-bottom: 2px solid;">
             <div class="col-md-auto">
-                <p >Årlige pris før rabat:</p>
+                <p>Årlige pris før rabat:</p>
             </div>
             <div class="col">
                 <p class="fixed-basket-box-price">@Model.FullPriceWithoutDiscount kr.</p>
@@ -199,7 +209,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <input type="submit" name="action" class="btn btn-info" value="Gem tilbud"/>
+                <input type="submit" name="action" class="btn btn-info" value="Gem tilbud" />
             </div>
             <div class="col">
                 <button type="button" class="btn btn-info">Ring mig op</button>
@@ -217,11 +227,11 @@
         document.getElementById('Excess').value = rangeNums[parseInt(index.value)];
     }
 
-    function searchBool(){
+    function searchBool() {
         searchClicked = true;
     }
-    
-    function validateMyForm(id){
+
+    function validateMyForm(id) {
         if (searchClicked) {
             searchClicked = false;
         }
@@ -295,7 +305,7 @@
             document.getElementById("ParkingInjury").style.backgroundColor = "greenyellow";
         }
 
-        //range input        
+        //range input
         var rangeNums = ["0", "2305", "4611", "7245", "9881", "12514"];
         var index = document.getElementById('rangeId');
         index.value = rangeNums.indexOf(document.getElementById('rangeLblId').innerHTML).toString();

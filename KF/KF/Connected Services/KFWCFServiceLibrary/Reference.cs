@@ -53,13 +53,13 @@ namespace KF.KFWCFServiceLibrary {
         private KF.KFWCFServiceLibrary.Insurance[] InsurancesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SeniorityDiscountField;
+        private double SeniorityDiscountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double TotalDiscountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int YearsWithoutCrashDiscountField;
+        private double YearsWithoutCrashDiscountField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -202,7 +202,7 @@ namespace KF.KFWCFServiceLibrary {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SeniorityDiscount {
+        public double SeniorityDiscount {
             get {
                 return this.SeniorityDiscountField;
             }
@@ -228,7 +228,7 @@ namespace KF.KFWCFServiceLibrary {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int YearsWithoutCrashDiscount {
+        public double YearsWithoutCrashDiscount {
             get {
                 return this.YearsWithoutCrashDiscountField;
             }
@@ -267,6 +267,9 @@ namespace KF.KFWCFServiceLibrary {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<bool> HasYellowPlatesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ModelField;
@@ -328,6 +331,19 @@ namespace KF.KFWCFServiceLibrary {
                 if ((this.HasYellowPlatesField.Equals(value) != true)) {
                     this.HasYellowPlatesField = value;
                     this.RaisePropertyChanged("HasYellowPlates");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
@@ -638,6 +654,9 @@ namespace KF.KFWCFServiceLibrary {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsSelectedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -653,6 +672,19 @@ namespace KF.KFWCFServiceLibrary {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
             }
         }
         

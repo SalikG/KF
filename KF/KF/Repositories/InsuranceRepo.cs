@@ -32,7 +32,7 @@ namespace KF.Repositories
 
         public bool SaveOffer(InsuranceCalc insuranceCalc)
         {
-            throw new NotImplementedException();
+            return client.SaveOffer(insuranceCalc);
         }
 
         public Customer GetCustomer(long cprNum)
