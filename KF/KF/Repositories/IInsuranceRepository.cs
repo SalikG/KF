@@ -16,5 +16,12 @@ namespace KF.Repositories
         Insurance[] GetInsurances();
 
         int GetExcess();
+
+        Customer GetCustomer(long cprNum);
+
+        List<InsuranceCalc> GetOffers(int customerId);
+
+        bool SaveOffer(InsuranceCalc insuranceCalc);
+
     }
 }

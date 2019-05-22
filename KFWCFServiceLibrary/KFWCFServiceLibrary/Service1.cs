@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
+using KFWCFServiceLibrary.DatabaseContextModels;
 using KFWCFServiceLibrary.Models;
+using Car = KFWCFServiceLibrary.Models.Car;
+using Customer = KFWCFServiceLibrary.Models.Customer;
+using Insurance = KFWCFServiceLibrary.Models.Insurance;
 
 namespace KFWCFServiceLibrary
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class Service1 : IService1
-    {      
+    {   
+        private KFInsuranceDataContext kfInsuranceData = new KFInsuranceDataContext();
+
         public InsuranceCalc CalculateInsurance(InsuranceCalc insuranceCalc)
         {
             //Lav udregning med data fra insuranceCalc
@@ -51,7 +54,7 @@ namespace KFWCFServiceLibrary
         {
             if (regNum.StartsWith("A") && regNum != null)
             {
-                return new Car()
+                return new Car
                 {
                     RegNr = regNum,
                     Brand = "Mercedes",
@@ -61,50 +64,48 @@ namespace KFWCFServiceLibrary
                     Year = 2018
                 };
             }
-            else
+
+            return new Car
             {
-                return new Car()
-                {
-                    RegNr = regNum,
-                    Brand = "Volvo",
-                    Model = "V70",
-                    NewPrice = 450000,
-                    Type = "PersonBil",
-                    Year = 2016
-                };
-            }
-           
+                RegNr = regNum,
+                Brand = "Volvo",
+                Model = "V70",
+                NewPrice = 450000,
+                Type = "PersonBil",
+                Year = 2016
+            };
+
         }
 
         public List<Insurance> GetInsurances()
         {
-            return new List<Insurance>()
+            return new List<Insurance>
             {
-                new Insurance()
+                new Insurance
                 {
                     Name = "Ansvar og Kasko",
                     Price = 6500,
                     IsSelected = true
                 },
-                new Insurance()
+                new Insurance
                 {
                     Name = "Vejhjælp",
                     Price = 600,
                     IsSelected = false
                 },
-                new Insurance()
+                new Insurance
                 {
                     Name = "Førepladsdækning",
                     Price = 400,
                     IsSelected = false
                 },
-                new Insurance()
+                new Insurance
                 {
                     Name = "Udvidet bildækning",
                     Price = 1000,
                     IsSelected = true
                 },
-                new Insurance()
+                new Insurance
                 {
                     Name = "Parkeringsskade",
                     Price = 800,
@@ -116,6 +117,73 @@ namespace KFWCFServiceLibrary
         public int GetExcess()
         {
             return 4611;
+        }
+
+        public Customer GetCustomer(long cprNum)
+        {
+            DatabaseContextModels.Customer customer =
+                (from c in kfInsuranceData.Customers where c.CprNr == cprNum select c).FirstOrDefault();
+            return new Customer()
+            {
+                CustomerId = customer.Id,
+                CprNr = customer.CprNr,
+                IsPrivateCustomer = customer.IsPrivate,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Address = customer.Address,
+                Zipcode = (from z in kfInsuranceData.Zipcodes where z.Id == customer.Fk_ZipcodeId select z.ZipcodeNum)
+                    .FirstOrDefault(),
+                City = (from c in kfInsuranceData.Cities
+                    select c.Zipcodes.FirstOrDefault(z => z.Id == customer.Fk_ZipcodeId)).FirstOrDefault()?.City.Name,
+                PhoneNumber = customer.PhoneNumber,
+                Mail = customer.Mail,
+                Seniority = customer.Seniority,
+                YearsWithoutCrash = customer.YearsWithoutCrash
+            };
+
+        }
+
+
+        public List<InsuranceCalc> GetOffers(int customerId)
+        {
+            List<InsuranceCalc> result = new List<InsuranceCalc>();
+            var offers = (from o in kfInsuranceData.Offers where o.Fk_CustomerId == customerId select o).ToList();
+            foreach (var o in offers)
+            {
+                //var offe = (from t in kfInsuranceData.InsuranceOffers where t.Fk_InsuranceId == 2 select t).ToList();
+                //offe.FirstOrDefault().
+                var insuranceList = (from i in kfInsuranceData.Insurances join insuranceOffer in kfInsuranceData.InsuranceOffers on i.Id equals insuranceOffer.Fk_InsuranceId  select i).ToList();
+                
+                //var insList = new List<Insurance>();
+                //foreach (var ins in insuranceList)
+                //{
+                    
+                //}
+                result.Add(new InsuranceCalc()
+                {
+                    Car = new Car()
+                    {
+                        Model = o.Car.Model.Model1,
+                        ExtraEquipment = o.Car.ExtraEquipment,
+                        Brand = o.Car.Model.Brand.Name,
+                        HasYellowPlates = o.Car.HasYellowPlates,
+                        NewPrice = o.Car.NewPrice,
+                        RegNr = o.Car.RegNum,
+                        Type = o.Car.Model.Type.Name,
+                        Year = o.Car.Year
+                    },
+                    Insurances = new List<Insurance>()
+                    {
+                    }
+                });
+            }
+
+            return result;
+        }
+
+        public bool SaveOffer(InsuranceCalc insuranceCalc)
+        {
+            throw new NotImplementedException();
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
@@ -130,5 +198,7 @@ namespace KFWCFServiceLibrary
             }
             return composite;
         }
+
+
     }
 }

@@ -25,6 +25,21 @@ namespace KF.Repositories
             return client.GetExcess();
         }
 
+        public List<InsuranceCalc> GetOffers(int customerId)
+        {
+            return client.GetOffers(customerId).ToList();
+        }
+
+        public bool SaveOffer(InsuranceCalc insuranceCalc)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Customer GetCustomer(long cprNum)
+        {
+            return client.GetCustomer(cprNum);
+        }
+
         public Insurance[] GetInsurances()
         {
             return client.GetInsurances();

@@ -62,4 +62,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Insurance" nillable="true" type="tns:Insurance" />
+  <xs:complexType name="ArrayOfInsuranceCalc">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InsuranceCalc" nillable="true" type="tns:InsuranceCalc" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfInsuranceCalc" nillable="true" type="tns:ArrayOfInsuranceCalc" />
 </xs:schema>

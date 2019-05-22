@@ -12,26 +12,19 @@ namespace KF.Controllers
     public class CalculatorController : Controller
     {
         private readonly IInsuranceRepository _repository = new InsuranceRepo();
-        private Customer Customer{ get => new Customer(){
-                Address = "Maegårdsvej 4",
-                City = "Allinge",
-                CprNr = 1234567890,
-                CustomerId = 1,
-                FirstName = "Saliko",
-                LastName = "MisterGman",
-                PhoneNumber = "12345678",
-                IsPrivateCustomer = true,
-                Mail = "ssss@honning.Syp.ru",
-                Zipcode = 3770
-            };
-         }
+        private Customer customer;
+
+
+    
 
 
         // GET: Calculator
         public ActionResult CarInsuranceCalc()
         {
-            InsuranceCalc insuranceCalc = new InsuranceCalc()
-                {Customer = Customer, Insurances = _repository.GetInsurances(), Excess = _repository.GetExcess()};
+        customer = _repository.GetCustomer(1234567890);
+            _repository.GetOffers(1);
+        InsuranceCalc insuranceCalc = new InsuranceCalc()
+                {Customer = customer, Insurances = _repository.GetInsurances(), Excess = _repository.GetExcess()};
  
             return View(insuranceCalc);
         }
@@ -40,7 +33,7 @@ namespace KF.Controllers
         public ActionResult CarInsuranceCalc(InsuranceCalc insuranceCalc, string action)
         {
             ModelState.Clear();
-            insuranceCalc.Customer = Customer;
+            insuranceCalc.Customer = customer;
             if (insuranceCalc.Car == null) return View("CarInsuranceCalc", insuranceCalc);
 
             if (action == "Søg")

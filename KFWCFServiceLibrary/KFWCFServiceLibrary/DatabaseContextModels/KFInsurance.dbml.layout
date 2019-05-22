@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14, 9" name="KFInsurance">
+  <DataContextMoniker Name="/KFInsuranceDataContext" />
+  <nestedChildShapes>
+    <classShape Id="ff07666b-0d8e-400e-b942-014554f9d3e0" absoluteBounds="3.5, 6.625, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/KFInsuranceDataContext/Zipcode" />
+      <nestedChildShapes>
+        <elementListCompartment Id="17f4365d-6a06-454e-a2d2-3711f17b2d64" absoluteBounds="3.515, 7.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="da7612ab-b16e-426e-a103-b4eb27d0de9d" absoluteBounds="0.75, 2.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/KFInsuranceDataContext/Brand" />
+      <nestedChildShapes>
+        <elementListCompartment Id="04629214-d5cd-4e69-ad76-76c3ba2b561b" absoluteBounds="0.765, 3.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="06a86ebf-9a1e-4c3c-8834-15ab816de7be" absoluteBounds="6.25, 2.25, 2, 2.155499674479167">
+      <DataClassMoniker Name="/KFInsuranceDataContext/Car" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2bfe3222-e633-4603-8ae3-0d912aac4b06" absoluteBounds="6.265, 2.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4487b96d-bb81-41d1-b71f-eb9ceac68161" absoluteBounds="0.75, 6.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/KFInsuranceDataContext/City" />
+      <nestedChildShapes>
+        <elementListCompartment Id="50f3e40d-1896-45e0-8ad7-4bc9535015d6" absoluteBounds="0.765, 7.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="368b6a24-764b-48de-8b8d-94323d5b13d2" absoluteBounds="6.25, 5.875, 2, 2.9247054036458326">
+      <DataClassMoniker Name="/KFInsuranceDataContext/Customer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0ecf8a50-51d9-4522-a339-585077086e9d" absoluteBounds="6.265, 6.335, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f304ab8a-ab2b-4d74-a549-8dcc20557001" absoluteBounds="9, 6.625, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/KFInsuranceDataContext/Insurance" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f048c8ac-97c6-4230-afdd-14a0af2ffa51" absoluteBounds="9.015, 7.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fd1008ca-f999-469a-8a58-b5a5337251f4" absoluteBounds="11.75, 2.625, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/KFInsuranceDataContext/InsuranceOffer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d2d42c24-b303-4859-91ba-5c2279819b70" absoluteBounds="11.765, 3.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5f6b2b4e-2e97-4e58-bf3e-d1c44a095fbc" absoluteBounds="3.5, 2.5, 2, 1.578595377604167">
+      <DataClassMoniker Name="/KFInsuranceDataContext/Model" />
+      <nestedChildShapes>
+        <elementListCompartment Id="041ddc9a-9738-4e90-957c-887174fdb05d" absoluteBounds="3.515, 2.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="602b7892-b45d-4626-b409-216a674e5b2e" absoluteBounds="9, 2, 2, 2.732403971354167">
+      <DataClassMoniker Name="/KFInsuranceDataContext/Offer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a11184cc-0a0d-4f7d-9e10-e76f4fb1ced1" absoluteBounds="9.015, 2.46, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f05abc24-3d2b-4d30-8e78-7a274d236be5" absoluteBounds="0.75, 0.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/KFInsuranceDataContext/Type" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b10dd6ac-bf04-4fea-ad3b-55c40943177b" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 7.34699625651042); (3.5 : 7.34699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/KFInsuranceDataContext/City/City_Zipcode" />
+      <nodes>
+        <classShapeMoniker Id="4487b96d-bb81-41d1-b71f-eb9ceac68161" />
+        <classShapeMoniker Id="ff07666b-0d8e-400e-b942-014554f9d3e0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 7.31814697265625); (6.25 : 7.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/KFInsuranceDataContext/Zipcode/Zipcode_Customer" />
+      <nodes>
+        <classShapeMoniker Id="ff07666b-0d8e-400e-b942-014554f9d3e0" />
+        <classShapeMoniker Id="368b6a24-764b-48de-8b8d-94323d5b13d2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 7.31814697265625); (12.75 : 7.31814697265625); (12.75 : 4.0112939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/KFInsuranceDataContext/Insurance/Insurance_InsuranceOffer" />
+      <nodes>
+        <classShapeMoniker Id="f304ab8a-ab2b-4d74-a549-8dcc20557001" />
+        <classShapeMoniker Id="fd1008ca-f999-469a-8a58-b5a5337251f4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 3.28929768880208); (6.25 : 3.28929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/KFInsuranceDataContext/Model/Model_Car" />
+      <nodes>
+        <classShapeMoniker Id="5f6b2b4e-2e97-4e58-bf3e-d1c44a095fbc" />
+        <classShapeMoniker Id="06a86ebf-9a1e-4c3c-8834-15ab816de7be" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 3.34699625651042); (3.5 : 3.34699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/KFInsuranceDataContext/Brand/Brand_Model" />
+      <nodes>
+        <classShapeMoniker Id="da7612ab-b16e-426e-a103-b4eb27d0de9d" />
+        <classShapeMoniker Id="5f6b2b4e-2e97-4e58-bf3e-d1c44a095fbc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 3.31814697265625); (11.75 : 3.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/KFInsuranceDataContext/Offer/Offer_InsuranceOffer" />
+      <nodes>
+        <classShapeMoniker Id="602b7892-b45d-4626-b409-216a674e5b2e" />
+        <classShapeMoniker Id="fd1008ca-f999-469a-8a58-b5a5337251f4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 3.32774983723958); (9 : 3.32774983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/KFInsuranceDataContext/Car/Car_Offer" />
+      <nodes>
+        <classShapeMoniker Id="06a86ebf-9a1e-4c3c-8834-15ab816de7be" />
+        <classShapeMoniker Id="602b7892-b45d-4626-b409-216a674e5b2e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 5.875); (8.625 : 5.5); (8.625 : 4.06132890429688); (9 : 4.06132890429688)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/KFInsuranceDataContext/Customer/Customer_Offer" />
+      <nodes>
+        <classShapeMoniker Id="368b6a24-764b-48de-8b8d-94323d5b13d2" />
+        <classShapeMoniker Id="602b7892-b45d-4626-b409-216a674e5b2e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.34699625651042); (4.5 : 1.34699625651042); (4.5 : 2.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/KFInsuranceDataContext/Type/Type_Model" />
+      <nodes>
+        <classShapeMoniker Id="f05abc24-3d2b-4d30-8e78-7a274d236be5" />
+        <classShapeMoniker Id="5f6b2b4e-2e97-4e58-bf3e-d1c44a095fbc" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
