@@ -1,7 +1,43 @@
-﻿
+﻿@model List<KF.KFWCFServiceLibrary.InsuranceCalc>
+
+
+
 @{
     ViewBag.Title = "Dine Forsikrings Tilbud";
 }
 
 <h2>Dine Forsikrings Tilbud</h2>
 
+<p>
+    @Html.ActionLink("Beregn ny bilforsikring", "CarInsuranceCalc", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayTextFor(model => model) Forsikring
+        </th>
+        <th>
+            @Html.DisplayTextFor(model => model) Bil
+        </th>
+        <th>
+            @Html.DisplayTextFor(model => model) Dato
+        </th>
+        <th>
+            @Html.DisplayTextFor(model => model) Præmie
+        </th>
+    </tr>
+
+
+ 
+        <tr>
+            <td>
+                @Html.DisplayTextFor(model => model)
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+
+</table>

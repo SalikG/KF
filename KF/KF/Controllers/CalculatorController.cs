@@ -56,7 +56,28 @@ namespace KF.Controllers
 
         public ActionResult InsuranceOffers()
         {
-            return View();
+            List<InsuranceCalc> insuranceCalcs = new List<InsuranceCalc>();
+            InsuranceCalc insurance = new InsuranceCalc()
+            {
+                BeginningDate = DateTime.Now,
+                Car = _repository.GetCar("asdf"),
+                CarChange = false,
+                CarNewPriceDiscount = 4,
+                Customer = Customer,
+                Excess = 123,
+                ExcessDiscount = 2,
+                FullPriceWithDiscount = 1000,
+                FullPriceWithoutDiscount = 100,
+                Insurances = _repository.GetInsurances(),
+                SeniorityDiscount = 4,
+                YearsWithoutCrashDiscount = 10,
+                TotalDiscount = 123
+            };
+            insuranceCalcs.Add(insurance);
+            insuranceCalcs.Add(insurance);
+            insuranceCalcs.Add(insurance);
+            insuranceCalcs.Add(insurance);
+            return View(insuranceCalcs);
         }
     }
 }
