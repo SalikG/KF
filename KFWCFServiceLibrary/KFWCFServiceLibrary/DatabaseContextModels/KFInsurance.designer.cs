@@ -57,6 +57,9 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
     partial void InsertModel(Model instance);
     partial void UpdateModel(Model instance);
     partial void DeleteModel(Model instance);
+    partial void InsertInsuranceOffer(InsuranceOffer instance);
+    partial void UpdateInsuranceOffer(InsuranceOffer instance);
+    partial void DeleteInsuranceOffer(InsuranceOffer instance);
     #endregion
 		
 		public KFInsuranceDataContext() : 
@@ -137,14 +140,6 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 			}
 		}
 		
-		public System.Data.Linq.Table<InsuranceOffer> InsuranceOffers
-		{
-			get
-			{
-				return this.GetTable<InsuranceOffer>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Offer> Offers
 		{
 			get
@@ -166,6 +161,14 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 			get
 			{
 				return this.GetTable<Model>();
+			}
+		}
+		
+		public System.Data.Linq.Table<InsuranceOffer> InsuranceOffers
+		{
+			get
+			{
+				return this.GetTable<InsuranceOffer>();
 			}
 		}
 	}
@@ -1235,6 +1238,8 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 		
 		private int _Price;
 		
+		private EntitySet<InsuranceOffer> _InsuranceOffers;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1249,6 +1254,7 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 		
 		public Insurance()
 		{
+			this._InsuranceOffers = new EntitySet<InsuranceOffer>(new Action<InsuranceOffer>(this.attach_InsuranceOffers), new Action<InsuranceOffer>(this.detach_InsuranceOffers));
 			OnCreated();
 		}
 		
@@ -1312,6 +1318,19 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Insurance_InsuranceOffer", Storage="_InsuranceOffers", ThisKey="Id", OtherKey="Fk_InsuranceId")]
+		public EntitySet<InsuranceOffer> InsuranceOffers
+		{
+			get
+			{
+				return this._InsuranceOffers;
+			}
+			set
+			{
+				this._InsuranceOffers.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1331,68 +1350,17 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InsuranceOffer")]
-	public partial class InsuranceOffer
-	{
 		
-		private int _Id;
-		
-		private int _Fk_OfferId;
-		
-		private int _Fk_InsuranceId;
-		
-		public InsuranceOffer()
+		private void attach_InsuranceOffers(InsuranceOffer entity)
 		{
+			this.SendPropertyChanging();
+			entity.Insurance = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
-		public int Id
+		private void detach_InsuranceOffers(InsuranceOffer entity)
 		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this._Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fk_OfferId", DbType="Int NOT NULL")]
-		public int Fk_OfferId
-		{
-			get
-			{
-				return this._Fk_OfferId;
-			}
-			set
-			{
-				if ((this._Fk_OfferId != value))
-				{
-					this._Fk_OfferId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fk_InsuranceId", DbType="Int NOT NULL")]
-		public int Fk_InsuranceId
-		{
-			get
-			{
-				return this._Fk_InsuranceId;
-			}
-			set
-			{
-				if ((this._Fk_InsuranceId != value))
-				{
-					this._Fk_InsuranceId = value;
-				}
-			}
+			this.SendPropertyChanging();
+			entity.Insurance = null;
 		}
 	}
 	
@@ -1421,6 +1389,8 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 		private System.DateTime _BeginningDate;
 		
 		private bool _CarChange;
+		
+		private EntitySet<InsuranceOffer> _InsuranceOffers;
 		
 		private EntityRef<Car> _Car;
 		
@@ -1454,6 +1424,7 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 		
 		public Offer()
 		{
+			this._InsuranceOffers = new EntitySet<InsuranceOffer>(new Action<InsuranceOffer>(this.attach_InsuranceOffers), new Action<InsuranceOffer>(this.detach_InsuranceOffers));
 			this._Car = default(EntityRef<Car>);
 			this._Customer = default(EntityRef<Customer>);
 			OnCreated();
@@ -1667,6 +1638,19 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Offer_InsuranceOffer", Storage="_InsuranceOffers", ThisKey="Id", OtherKey="Fk_OfferId")]
+		public EntitySet<InsuranceOffer> InsuranceOffers
+		{
+			get
+			{
+				return this._InsuranceOffers;
+			}
+			set
+			{
+				this._InsuranceOffers.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Car_Offer", Storage="_Car", ThisKey="Fk_CarId", OtherKey="Id", IsForeignKey=true)]
 		public Car Car
 		{
@@ -1753,6 +1737,18 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_InsuranceOffers(InsuranceOffer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Offer = this;
+		}
+		
+		private void detach_InsuranceOffers(InsuranceOffer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Offer = null;
 		}
 	}
 	
@@ -2111,6 +2107,198 @@ namespace KFWCFServiceLibrary.DatabaseContextModels
 		{
 			this.SendPropertyChanging();
 			entity.Model = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InsuranceOffer")]
+	public partial class InsuranceOffer : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _Fk_OfferId;
+		
+		private int _Fk_InsuranceId;
+		
+		private EntityRef<Insurance> _Insurance;
+		
+		private EntityRef<Offer> _Offer;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnFk_OfferIdChanging(int value);
+    partial void OnFk_OfferIdChanged();
+    partial void OnFk_InsuranceIdChanging(int value);
+    partial void OnFk_InsuranceIdChanged();
+    #endregion
+		
+		public InsuranceOffer()
+		{
+			this._Insurance = default(EntityRef<Insurance>);
+			this._Offer = default(EntityRef<Offer>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fk_OfferId", DbType="Int NOT NULL")]
+		public int Fk_OfferId
+		{
+			get
+			{
+				return this._Fk_OfferId;
+			}
+			set
+			{
+				if ((this._Fk_OfferId != value))
+				{
+					if (this._Offer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFk_OfferIdChanging(value);
+					this.SendPropertyChanging();
+					this._Fk_OfferId = value;
+					this.SendPropertyChanged("Fk_OfferId");
+					this.OnFk_OfferIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fk_InsuranceId", DbType="Int NOT NULL")]
+		public int Fk_InsuranceId
+		{
+			get
+			{
+				return this._Fk_InsuranceId;
+			}
+			set
+			{
+				if ((this._Fk_InsuranceId != value))
+				{
+					if (this._Insurance.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFk_InsuranceIdChanging(value);
+					this.SendPropertyChanging();
+					this._Fk_InsuranceId = value;
+					this.SendPropertyChanged("Fk_InsuranceId");
+					this.OnFk_InsuranceIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Insurance_InsuranceOffer", Storage="_Insurance", ThisKey="Fk_InsuranceId", OtherKey="Id", IsForeignKey=true)]
+		public Insurance Insurance
+		{
+			get
+			{
+				return this._Insurance.Entity;
+			}
+			set
+			{
+				Insurance previousValue = this._Insurance.Entity;
+				if (((previousValue != value) 
+							|| (this._Insurance.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Insurance.Entity = null;
+						previousValue.InsuranceOffers.Remove(this);
+					}
+					this._Insurance.Entity = value;
+					if ((value != null))
+					{
+						value.InsuranceOffers.Add(this);
+						this._Fk_InsuranceId = value.Id;
+					}
+					else
+					{
+						this._Fk_InsuranceId = default(int);
+					}
+					this.SendPropertyChanged("Insurance");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Offer_InsuranceOffer", Storage="_Offer", ThisKey="Fk_OfferId", OtherKey="Id", IsForeignKey=true)]
+		public Offer Offer
+		{
+			get
+			{
+				return this._Offer.Entity;
+			}
+			set
+			{
+				Offer previousValue = this._Offer.Entity;
+				if (((previousValue != value) 
+							|| (this._Offer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Offer.Entity = null;
+						previousValue.InsuranceOffers.Remove(this);
+					}
+					this._Offer.Entity = value;
+					if ((value != null))
+					{
+						value.InsuranceOffers.Add(this);
+						this._Fk_OfferId = value.Id;
+					}
+					else
+					{
+						this._Fk_OfferId = default(int);
+					}
+					this.SendPropertyChanged("Offer");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

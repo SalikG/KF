@@ -21,7 +21,8 @@ namespace KF.Controllers
         // GET: Calculator
         public ActionResult CarInsuranceCalc()
         {
-        InsuranceCalc insuranceCalc = new InsuranceCalc()
+            Repository.GetOffers(1);
+            InsuranceCalc insuranceCalc = new InsuranceCalc()
                 {Customer = _customer, Insurances = Repository.GetInsurances(), Excess = Repository.GetExcess()};
  
             return View(insuranceCalc);
@@ -43,7 +44,9 @@ namespace KF.Controllers
             else if (action == "Gem tilbud")
             {
                 if (insuranceCalc.Car.RegNr == null) return View("CarInsuranceCalc", insuranceCalc);
-                Repository.SaveOffer(insuranceCalc);
+                var saveSuccess = Repository.SaveOffer(insuranceCalc);
+                Response.Redirect(Request.UrlReferrer.ToString() + "?saveSuccess=" + saveSuccess);
+
                 return View("CarInsuranceCalc", insuranceCalc);
             }
 

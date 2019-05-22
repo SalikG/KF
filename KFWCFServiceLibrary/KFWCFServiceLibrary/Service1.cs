@@ -169,6 +169,7 @@ namespace KFWCFServiceLibrary
                         IsSelected = true
                     });
                 }
+
                 result.Add(CalculateInsurance(new InsuranceCalc()
                 {
                     Car = new Car()
@@ -198,34 +199,42 @@ namespace KFWCFServiceLibrary
 
         public bool SaveOffer(InsuranceCalc insuranceCalc)
         {
-            var offer = new Offer()
-            {
-                Fk_CustomerId = insuranceCalc.Customer.CustomerId,
-                Fk_CarId = insuranceCalc.Car.Id,
-                CarNewPriceDiscount = insuranceCalc.CarNewPriceDiscount,
-                SeniorityDiscount = insuranceCalc.SeniorityDiscount,
-                YearsWithoutCrashDiscount = insuranceCalc.YearsWithoutCrashDiscount,
-                ExcessDiscount = insuranceCalc.ExcessDiscount,
-                Excess = insuranceCalc.Excess,
-                BeginningDate = DateTime.Now,
-                CarChange = insuranceCalc.CarChange       
-            };
-
-            kfInsuranceData.Offers.InsertOnSubmit(offer);
-            kfInsuranceData.Offers.Context.SubmitChanges();
-            var insOffers = new List<InsuranceOffer>();
-            foreach (var ins in insuranceCalc.Insurances.Where(i => i.IsSelected))
-            {
-                insOffers.Add(new InsuranceOffer()
+            try
+            {                         
+                var offer = new Offer()
                 {
-                    Fk_InsuranceId = ins.Id,
-                    Fk_OfferId = (from o in kfInsuranceData.Offers where o.BeginningDate == offer.BeginningDate select o.Id).FirstOrDefault()
-                });
-            }
-            kfInsuranceData.InsuranceOffers.InsertAllOnSubmit(insOffers);
-            kfInsuranceData.InsuranceOffers.Context.SubmitChanges();
+                    Fk_CustomerId = insuranceCalc.Customer.CustomerId,
+                    Fk_CarId = insuranceCalc.Car.Id,
+                    CarNewPriceDiscount = insuranceCalc.CarNewPriceDiscount,
+                    SeniorityDiscount = insuranceCalc.SeniorityDiscount,
+                    YearsWithoutCrashDiscount = insuranceCalc.YearsWithoutCrashDiscount,
+                    ExcessDiscount = insuranceCalc.ExcessDiscount,
+                    Excess = insuranceCalc.Excess,
+                    BeginningDate = DateTime.Now,
+                    CarChange = insuranceCalc.CarChange       
+                };
 
-            return true;
+                kfInsuranceData.Offers.InsertOnSubmit(offer);
+                kfInsuranceData.Offers.Context.SubmitChanges();
+                var insOffers = new List<InsuranceOffer>();
+                foreach (var ins in insuranceCalc.Insurances.Where(i => i.IsSelected))
+                {
+                    insOffers.Add(new InsuranceOffer()
+                    {
+                        Fk_InsuranceId = ins.Id,
+                        Fk_OfferId = (from o in kfInsuranceData.Offers where o.BeginningDate == offer.BeginningDate select o.Id).FirstOrDefault()
+                    });
+                }
+                kfInsuranceData.InsuranceOffers.InsertAllOnSubmit(insOffers);
+                kfInsuranceData.InsuranceOffers.Context.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
         }
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)

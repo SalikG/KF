@@ -61,15 +61,6 @@
       <Association Name="Insurance_InsuranceOffer" Member="InsuranceOffers" ThisKey="Id" OtherKey="Fk_InsuranceId" Type="InsuranceOffer" />
     </Type>
   </Table>
-  <Table Name="dbo.InsuranceOffer" Member="InsuranceOffers">
-    <Type Name="InsuranceOffer">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Fk_OfferId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Fk_InsuranceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Insurance_InsuranceOffer" Member="Insurance" ThisKey="Fk_InsuranceId" OtherKey="Id" Type="Insurance" IsForeignKey="true" />
-      <Association Name="Offer_InsuranceOffer" Member="Offer" ThisKey="Fk_OfferId" OtherKey="Id" Type="Offer" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Offer" Member="Offers">
     <Type Name="Offer">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -103,6 +94,15 @@
       <Association Name="Model_Car" Member="Cars" ThisKey="Id" OtherKey="Fk_ModelId" Type="Car" />
       <Association Name="Brand_Model" Member="Brand" ThisKey="Fk_BrandId" OtherKey="Id" Type="Brand" IsForeignKey="true" />
       <Association Name="Type_Model" Member="Type" ThisKey="Fk_TypeId" OtherKey="Id" Type="Type" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InsuranceOffer" Member="InsuranceOffers">
+    <Type Name="InsuranceOffer">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Fk_OfferId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fk_InsuranceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Insurance_InsuranceOffer" Member="Insurance" ThisKey="Fk_InsuranceId" OtherKey="Id" Type="Insurance" IsForeignKey="true" />
+      <Association Name="Offer_InsuranceOffer" Member="Offer" ThisKey="Fk_OfferId" OtherKey="Id" Type="Offer" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
