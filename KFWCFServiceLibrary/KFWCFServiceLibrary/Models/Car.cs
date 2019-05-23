@@ -7,6 +7,8 @@ namespace KFWCFServiceLibrary.Models
     public class Car
     {
         [DataMember]
+        public int Id { get; set; }
+        [DataMember]
         public string RegNr { get; set; }
         [DataMember]
         public string Brand { get; set; }
@@ -22,6 +24,6 @@ namespace KFWCFServiceLibrary.Models
         public bool? HasYellowPlates{ get; set; }
         [DataMember]
         public bool? ExtraEquipment { get; set; }
-
+       
     }
 }
