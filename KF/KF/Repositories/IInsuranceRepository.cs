@@ -17,7 +17,7 @@ namespace KF.Repositories
 
         int GetExcess();
 
-        Customer GetCustomer(long cprNum);
+        Customer GetCustomer(int customerId);
 
         List<InsuranceCalc> GetOffers(int customerId);
 

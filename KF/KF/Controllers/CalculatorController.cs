@@ -12,7 +12,7 @@ namespace KF.Controllers
     public class CalculatorController : Controller
     {
         private static readonly IInsuranceRepository Repository = new InsuranceRepo();
-        private Customer _customer = Repository.GetCustomer(1234567890);
+        private Customer _customer = Repository.GetCustomer(1);
 
 
     
@@ -56,27 +56,8 @@ namespace KF.Controllers
 
         public ActionResult InsuranceOffers()
         {
-            List<InsuranceCalc> insuranceCalcs = new List<InsuranceCalc>();
-            InsuranceCalc insurance = new InsuranceCalc()
-            {
-                BeginningDate = DateTime.Now,
-                Car = _repository.GetCar("asdf"),
-                CarChange = false,
-                CarNewPriceDiscount = 4,
-                Customer = Customer,
-                Excess = 123,
-                ExcessDiscount = 2,
-                FullPriceWithDiscount = 1000,
-                FullPriceWithoutDiscount = 100,
-                Insurances = _repository.GetInsurances(),
-                SeniorityDiscount = 4,
-                YearsWithoutCrashDiscount = 10,
-                TotalDiscount = 123
-            };
-            insuranceCalcs.Add(insurance);
-            insuranceCalcs.Add(insurance);
-            insuranceCalcs.Add(insurance);
-            insuranceCalcs.Add(insurance);
+            List<InsuranceCalc> insuranceCalcs = Repository.GetOffers(_customer.CustomerId);
+            
             return View(insuranceCalcs);
         }
     }
