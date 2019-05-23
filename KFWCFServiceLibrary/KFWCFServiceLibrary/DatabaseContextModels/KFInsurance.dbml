@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="KF" Class="KFInsuranceDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=KF;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False" SettingsObjectName="KFWCFServiceLibrary.Properties.Settings" SettingsPropertyName="KFConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Zipcode" Member="Zipcodes">
+    <Type Name="Zipcode">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ZipcodeNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fk_CityId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Zipcode_Customer" Member="Customers" ThisKey="Id" OtherKey="Fk_ZipcodeId" Type="Customer" />
+      <Association Name="City_Zipcode" Member="City" ThisKey="Fk_CityId" OtherKey="Id" Type="City" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Brand" Member="Brands">
+    <Type Name="Brand">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Brand_Model" Member="Models" ThisKey="Id" OtherKey="Fk_BrandId" Type="Model" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Car" Member="Cars">
+    <Type Name="Car">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Fk_ModelId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RegNum" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="NewPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Year" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HasYellowPlates" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ExtraEquipment" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Car_Offer" Member="Offers" ThisKey="Id" OtherKey="Fk_CarId" Type="Offer" />
+      <Association Name="Model_Car" Member="Model" ThisKey="Fk_ModelId" OtherKey="Id" Type="Model" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.City" Member="Cities">
+    <Type Name="City">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Association Name="City_Zipcode" Member="Zipcodes" ThisKey="Id" OtherKey="Fk_CityId" Type="Zipcode" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customer" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CprNr" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IsPrivate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Mail" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Seniority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="YearsWithoutCrash" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fk_ZipcodeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_Offer" Member="Offers" ThisKey="Id" OtherKey="Fk_CustomerId" Type="Offer" />
+      <Association Name="Zipcode_Customer" Member="Zipcode" ThisKey="Fk_ZipcodeId" OtherKey="Id" Type="Zipcode" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Insurance" Member="Insurances">
+    <Type Name="Insurance">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Insurance_InsuranceOffer" Member="InsuranceOffers" ThisKey="Id" OtherKey="Fk_InsuranceId" Type="InsuranceOffer" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Offer" Member="Offers">
+    <Type Name="Offer">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Fk_CarId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fk_CustomerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CarNewPriceDiscount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="SeniorityDiscount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="YearsWithoutCrashDiscount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ExcessDiscount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Excess" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BeginningDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CarChange" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Offer_InsuranceOffer" Member="InsuranceOffers" ThisKey="Id" OtherKey="Fk_OfferId" Type="InsuranceOffer" />
+      <Association Name="Car_Offer" Member="Car" ThisKey="Fk_CarId" OtherKey="Id" Type="Car" IsForeignKey="true" />
+      <Association Name="Customer_Offer" Member="Customer" ThisKey="Fk_CustomerId" OtherKey="Id" Type="Customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Type" Member="Types">
+    <Type Name="Type">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Type_Model" Member="Models" ThisKey="Id" OtherKey="Fk_TypeId" Type="Model" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Model" Member="Models">
+    <Type Name="Model">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Fk_BrandId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fk_TypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Association Name="Model_Car" Member="Cars" ThisKey="Id" OtherKey="Fk_ModelId" Type="Car" />
+      <Association Name="Brand_Model" Member="Brand" ThisKey="Fk_BrandId" OtherKey="Id" Type="Brand" IsForeignKey="true" />
+      <Association Name="Type_Model" Member="Type" ThisKey="Fk_TypeId" OtherKey="Id" Type="Type" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InsuranceOffer" Member="InsuranceOffers">
+    <Type Name="InsuranceOffer">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Fk_OfferId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fk_InsuranceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Insurance_InsuranceOffer" Member="Insurance" ThisKey="Fk_InsuranceId" OtherKey="Id" Type="Insurance" IsForeignKey="true" />
+      <Association Name="Offer_InsuranceOffer" Member="Offer" ThisKey="Fk_OfferId" OtherKey="Id" Type="Offer" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

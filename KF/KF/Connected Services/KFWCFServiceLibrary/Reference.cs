@@ -53,13 +53,13 @@ namespace KF.KFWCFServiceLibrary {
         private KF.KFWCFServiceLibrary.Insurance[] InsurancesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SeniorityDiscountField;
+        private double SeniorityDiscountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double TotalDiscountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int YearsWithoutCrashDiscountField;
+        private double YearsWithoutCrashDiscountField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -202,7 +202,7 @@ namespace KF.KFWCFServiceLibrary {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SeniorityDiscount {
+        public double SeniorityDiscount {
             get {
                 return this.SeniorityDiscountField;
             }
@@ -228,7 +228,7 @@ namespace KF.KFWCFServiceLibrary {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int YearsWithoutCrashDiscount {
+        public double YearsWithoutCrashDiscount {
             get {
                 return this.YearsWithoutCrashDiscountField;
             }
@@ -267,6 +267,9 @@ namespace KF.KFWCFServiceLibrary {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<bool> HasYellowPlatesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ModelField;
@@ -328,6 +331,19 @@ namespace KF.KFWCFServiceLibrary {
                 if ((this.HasYellowPlatesField.Equals(value) != true)) {
                     this.HasYellowPlatesField = value;
                     this.RaisePropertyChanged("HasYellowPlates");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
@@ -638,6 +654,9 @@ namespace KF.KFWCFServiceLibrary {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsSelectedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -653,6 +672,19 @@ namespace KF.KFWCFServiceLibrary {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
             }
         }
         
@@ -732,6 +764,24 @@ namespace KF.KFWCFServiceLibrary {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetExcess", ReplyAction="http://tempuri.org/IService1/GetExcessResponse")]
         System.Threading.Tasks.Task<int> GetExcessAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCustomer", ReplyAction="http://tempuri.org/IService1/GetCustomerResponse")]
+        KF.KFWCFServiceLibrary.Customer GetCustomer(long cprNum);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCustomer", ReplyAction="http://tempuri.org/IService1/GetCustomerResponse")]
+        System.Threading.Tasks.Task<KF.KFWCFServiceLibrary.Customer> GetCustomerAsync(long cprNum);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOffers", ReplyAction="http://tempuri.org/IService1/GetOffersResponse")]
+        KF.KFWCFServiceLibrary.InsuranceCalc[] GetOffers(int customerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOffers", ReplyAction="http://tempuri.org/IService1/GetOffersResponse")]
+        System.Threading.Tasks.Task<KF.KFWCFServiceLibrary.InsuranceCalc[]> GetOffersAsync(int customerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveOffer", ReplyAction="http://tempuri.org/IService1/SaveOfferResponse")]
+        bool SaveOffer(KF.KFWCFServiceLibrary.InsuranceCalc insuranceCalc);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveOffer", ReplyAction="http://tempuri.org/IService1/SaveOfferResponse")]
+        System.Threading.Tasks.Task<bool> SaveOfferAsync(KF.KFWCFServiceLibrary.InsuranceCalc insuranceCalc);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -791,6 +841,30 @@ namespace KF.KFWCFServiceLibrary {
         
         public System.Threading.Tasks.Task<int> GetExcessAsync() {
             return base.Channel.GetExcessAsync();
+        }
+        
+        public KF.KFWCFServiceLibrary.Customer GetCustomer(long cprNum) {
+            return base.Channel.GetCustomer(cprNum);
+        }
+        
+        public System.Threading.Tasks.Task<KF.KFWCFServiceLibrary.Customer> GetCustomerAsync(long cprNum) {
+            return base.Channel.GetCustomerAsync(cprNum);
+        }
+        
+        public KF.KFWCFServiceLibrary.InsuranceCalc[] GetOffers(int customerId) {
+            return base.Channel.GetOffers(customerId);
+        }
+        
+        public System.Threading.Tasks.Task<KF.KFWCFServiceLibrary.InsuranceCalc[]> GetOffersAsync(int customerId) {
+            return base.Channel.GetOffersAsync(customerId);
+        }
+        
+        public bool SaveOffer(KF.KFWCFServiceLibrary.InsuranceCalc insuranceCalc) {
+            return base.Channel.SaveOffer(insuranceCalc);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SaveOfferAsync(KF.KFWCFServiceLibrary.InsuranceCalc insuranceCalc) {
+            return base.Channel.SaveOfferAsync(insuranceCalc);
         }
     }
 }

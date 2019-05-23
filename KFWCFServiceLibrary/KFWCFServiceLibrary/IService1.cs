@@ -24,6 +24,15 @@ namespace KFWCFServiceLibrary
         [OperationContract]
         int GetExcess();
 
+        [OperationContract]
+        Customer GetCustomer(long cprNum);
+
+        [OperationContract]
+        List<InsuranceCalc> GetOffers(int customerId);
+
+        [OperationContract]
+        bool SaveOffer(InsuranceCalc insuranceCalc);
+
         // TODO: Add your service operations here
     }
 
