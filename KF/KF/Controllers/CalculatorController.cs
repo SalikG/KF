@@ -12,7 +12,7 @@ namespace KF.Controllers
     public class CalculatorController : Controller
     {
         private static readonly IInsuranceRepository Repository = new InsuranceRepo();
-        private Customer _customer = Repository.GetCustomer(1234567890);
+        private Customer _customer = Repository.GetCustomer(1);
 
 
     
@@ -52,6 +52,13 @@ namespace KF.Controllers
 
             var insuranceOffer = Repository.CalculateInsurance(insuranceCalc);
             return View("CarInsuranceCalc", insuranceOffer);
+        }
+
+        public ActionResult InsuranceOffers()
+        {
+            List<InsuranceCalc> insuranceCalcs = Repository.GetOffers(_customer.CustomerId);
+            
+            return View(insuranceCalcs);
         }
     }
 }

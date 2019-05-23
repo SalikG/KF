@@ -25,7 +25,7 @@ namespace KFWCFServiceLibrary
         int GetExcess();
 
         [OperationContract]
-        Customer GetCustomer(long cprNum);
+        Customer GetCustomer(int customerId);
 
         [OperationContract]
         List<InsuranceCalc> GetOffers(int customerId);

@@ -766,10 +766,10 @@ namespace KF.KFWCFServiceLibrary {
         System.Threading.Tasks.Task<int> GetExcessAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCustomer", ReplyAction="http://tempuri.org/IService1/GetCustomerResponse")]
-        KF.KFWCFServiceLibrary.Customer GetCustomer(long cprNum);
+        KF.KFWCFServiceLibrary.Customer GetCustomer(int customerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCustomer", ReplyAction="http://tempuri.org/IService1/GetCustomerResponse")]
-        System.Threading.Tasks.Task<KF.KFWCFServiceLibrary.Customer> GetCustomerAsync(long cprNum);
+        System.Threading.Tasks.Task<KF.KFWCFServiceLibrary.Customer> GetCustomerAsync(int customerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOffers", ReplyAction="http://tempuri.org/IService1/GetOffersResponse")]
         KF.KFWCFServiceLibrary.InsuranceCalc[] GetOffers(int customerId);
@@ -843,12 +843,12 @@ namespace KF.KFWCFServiceLibrary {
             return base.Channel.GetExcessAsync();
         }
         
-        public KF.KFWCFServiceLibrary.Customer GetCustomer(long cprNum) {
-            return base.Channel.GetCustomer(cprNum);
+        public KF.KFWCFServiceLibrary.Customer GetCustomer(int customerId) {
+            return base.Channel.GetCustomer(customerId);
         }
         
-        public System.Threading.Tasks.Task<KF.KFWCFServiceLibrary.Customer> GetCustomerAsync(long cprNum) {
-            return base.Channel.GetCustomerAsync(cprNum);
+        public System.Threading.Tasks.Task<KF.KFWCFServiceLibrary.Customer> GetCustomerAsync(int customerId) {
+            return base.Channel.GetCustomerAsync(customerId);
         }
         
         public KF.KFWCFServiceLibrary.InsuranceCalc[] GetOffers(int customerId) {

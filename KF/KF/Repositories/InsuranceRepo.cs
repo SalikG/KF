@@ -35,9 +35,9 @@ namespace KF.Repositories
             return client.SaveOffer(insuranceCalc);
         }
 
-        public Customer GetCustomer(long cprNum)
+        public Customer GetCustomer(int customerId)
         {
-            return client.GetCustomer(cprNum);
+            return client.GetCustomer(customerId);
         }
 
         public Insurance[] GetInsurances()

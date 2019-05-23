@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using KFWCFServiceLibrary.DatabaseContextModels;
 using KFWCFServiceLibrary.Models;
+using Microsoft.SqlServer.Server;
 using Car = KFWCFServiceLibrary.Models.Car;
 using Customer = KFWCFServiceLibrary.Models.Customer;
 using Insurance = KFWCFServiceLibrary.Models.Insurance;
@@ -126,10 +127,10 @@ namespace KFWCFServiceLibrary
             return 4611;
         }
 
-        public Customer GetCustomer(long cprNum)
+        public Customer GetCustomer(int customerId)
         {
             DatabaseContextModels.Customer customer =
-                (from c in kfInsuranceData.Customers where c.CprNr == cprNum select c).FirstOrDefault();
+                (from c in kfInsuranceData.Customers where c.Id == customerId select c).FirstOrDefault();
             return new Customer()
             {
                 CustomerId = customer.Id,
@@ -154,7 +155,7 @@ namespace KFWCFServiceLibrary
         public List<InsuranceCalc> GetOffers(int customerId)
         {
             List<InsuranceCalc> result = new List<InsuranceCalc>();
-            var offers = (from o in kfInsuranceData.Offers where o.Fk_CustomerId == customerId select o).ToList();
+            var offers = (from o in kfInsuranceData.Offers where o.Fk_CustomerId == customerId && (DateTime.Now - o.BeginningDate).TotalDays <= 30 orderby o.BeginningDate ascending select o).ToList();
             foreach (var o in offers)
             {
                 var insuranceList = (from i in kfInsuranceData.Insurances join insuranceOffer in kfInsuranceData.InsuranceOffers on i.Id equals insuranceOffer.Fk_InsuranceId where insuranceOffer.Fk_OfferId == o.Id select i).ToList();
@@ -183,6 +184,7 @@ namespace KFWCFServiceLibrary
                         Type = o.Car.Model.Type.Name,
                         Year = o.Car.Year
                     },
+                    Customer = GetCustomer(customerId),
                     Insurances = insList,                 
                     CarNewPriceDiscount = o.CarNewPriceDiscount,
                     SeniorityDiscount = o.SeniorityDiscount,
