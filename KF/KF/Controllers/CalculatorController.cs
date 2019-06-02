@@ -27,10 +27,14 @@ namespace KF.Controllers
             return View(insuranceCalc);
         }
 
+        //action parameteret lader os differentiere mellem de forskellige "submit" på siden
+        //basert på hvilken knap brugeren trykker på
         [HttpPost]
         public ActionResult CarInsuranceCalc(InsuranceCalc insuranceCalc, string action)
         {
+            //Forces the MVC engine to rebuild the model to be passed to your view
             ModelState.Clear();
+
             insuranceCalc.Customer = _customer;
             if (insuranceCalc.Car == null) return View("CarInsuranceCalc", insuranceCalc);
 
