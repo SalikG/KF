@@ -17,7 +17,7 @@ namespace KFWCFServiceLibrary
 
         public InsuranceCalc CalculateInsurance(InsuranceCalc insuranceCalc)
         {
-            //Lav udregning med data fra insuranceCalc
+            //Laver udregning med data fra insuranceCalc
             double totalYearlyPrice = 0;         
             foreach (Insurance insurance in insuranceCalc.Insurances.Where(i => i.IsSelected))
             {
@@ -53,7 +53,7 @@ namespace KFWCFServiceLibrary
 
         public Car GetCar(string regNum)
         {
-            if (regNum.StartsWith("A") && regNum != null)
+            if (regNum.ToLower().StartsWith("a") && regNum != null)
             {
                 return new Car
                 {
@@ -158,7 +158,11 @@ namespace KFWCFServiceLibrary
             var offers = (from o in kfInsuranceData.Offers where o.Fk_CustomerId == customerId && (DateTime.Now - o.BeginningDate).TotalDays <= 30 orderby o.BeginningDate ascending select o).ToList();
             foreach (var o in offers)
             {
-                var insuranceList = (from i in kfInsuranceData.Insurances join insuranceOffer in kfInsuranceData.InsuranceOffers on i.Id equals insuranceOffer.Fk_InsuranceId where insuranceOffer.Fk_OfferId == o.Id select i).ToList();
+                // Laver en liste af insurances som det specifikke offer indeholder
+                var insuranceList = (from i in kfInsuranceData.Insurances
+                    join insuranceOffer in kfInsuranceData.InsuranceOffers on i.Id 
+                        equals insuranceOffer.Fk_InsuranceId where insuranceOffer.Fk_OfferId == o.Id
+                            select i).ToList();
 
                 var insList = new List<Insurance>();
                 foreach (var ins in insuranceList)
