@@ -11,11 +11,21 @@ namespace KF.Controllers
     
     public class CalculatorController : Controller
     {
-        private static readonly IInsuranceRepository Repository = new InsuranceRepo();
-        private Customer _customer = Repository.GetCustomer(1);
+        IInsuranceRepository Repository;
+        private Customer _customer;
 
+        public CalculatorController(Customer customer, IInsuranceRepository repository)
+        {
+            Repository = repository;
+            _customer = customer;
+        }
 
-    
+        public CalculatorController()
+        {
+            Repository = new InsuranceRepo();
+            _customer = Repository.GetCustomer(1);
+        }
+
 
 
         // GET: Calculator
@@ -24,7 +34,7 @@ namespace KF.Controllers
             InsuranceCalc insuranceCalc = new InsuranceCalc()
                 {Customer = _customer, Insurances = Repository.GetInsurances(), Excess = Repository.GetExcess()};
  
-            return View(insuranceCalc);
+            return View("CarInsuranceCalc", insuranceCalc);
         }
 
         //action parameteret lader os differentiere mellem de forskellige "submit" på siden

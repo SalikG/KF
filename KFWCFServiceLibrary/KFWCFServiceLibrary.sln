@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFWCFServiceLibrary", "KFWCFServiceLibrary\KFWCFServiceLibrary.csproj", "{DDAD6BC7-02E7-4A17-B958-6B6EE3D289B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFServiceTest", "KFServiceTest\KFServiceTest.csproj", "{0EEA320F-9D47-422A-90EA-CDD0D5CDD375}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DDAD6BC7-02E7-4A17-B958-6B6EE3D289B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDAD6BC7-02E7-4A17-B958-6B6EE3D289B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDAD6BC7-02E7-4A17-B958-6B6EE3D289B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EEA320F-9D47-422A-90EA-CDD0D5CDD375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EEA320F-9D47-422A-90EA-CDD0D5CDD375}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EEA320F-9D47-422A-90EA-CDD0D5CDD375}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EEA320F-9D47-422A-90EA-CDD0D5CDD375}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

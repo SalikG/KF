@@ -162,6 +162,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IInsuranceRepository.cs" />
     <Compile Include="Repositories\InsuranceRepo.cs" />
+    <Compile Include="Repositories\InsuranceStubRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Code\Helpers\CalcHelper.cshtml" />

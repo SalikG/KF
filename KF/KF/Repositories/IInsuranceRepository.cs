@@ -7,7 +7,7 @@ using KF.KFWCFServiceLibrary;
 
 namespace KF.Repositories
 {
-    interface IInsuranceRepository
+    public interface IInsuranceRepository
     {
         InsuranceCalc CalculateInsurance(InsuranceCalc insuranceCalc);
 

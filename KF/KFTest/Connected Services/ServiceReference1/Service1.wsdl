@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/KFWCFServiceLibrary/Service1/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/KFWCFServiceLibrary/Service1/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/KFWCFServiceLibrary/Service1/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KFWCFServiceLibrary.Models" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IService1_CalculateInsurance_InputMessage">
+    <wsdl:part name="parameters" element="tns:CalculateInsurance" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CalculateInsurance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CalculateInsuranceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCar_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCar" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetInsurances_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInsurances" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetInsurances_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInsurancesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetExcess_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetExcess" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetExcess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetExcessResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOffers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOffers" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOffers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOffersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SaveOffer_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveOffer" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SaveOffer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveOfferResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IService1">
+    <wsdl:operation name="CalculateInsurance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CalculateInsurance" message="tns:IService1_CalculateInsurance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CalculateInsuranceResponse" message="tns:IService1_CalculateInsurance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCar" message="tns:IService1_GetCar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCarResponse" message="tns:IService1_GetCar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInsurances">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetInsurances" message="tns:IService1_GetInsurances_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetInsurancesResponse" message="tns:IService1_GetInsurances_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExcess">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetExcess" message="tns:IService1_GetExcess_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetExcessResponse" message="tns:IService1_GetExcess_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCustomer" message="tns:IService1_GetCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCustomerResponse" message="tns:IService1_GetCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOffers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOffers" message="tns:IService1_GetOffers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOffersResponse" message="tns:IService1_GetOffers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveOffer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveOffer" message="tns:IService1_SaveOffer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SaveOfferResponse" message="tns:IService1_SaveOffer_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CalculateInsurance">
+      <soap:operation soapAction="http://tempuri.org/IService1/CalculateInsurance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCar">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetCar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInsurances">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetInsurances" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExcess">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetExcess" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomer">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOffers">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetOffers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveOffer">
+      <soap:operation soapAction="http://tempuri.org/IService1/SaveOffer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/KFWCFServiceLibrary/Service1/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
